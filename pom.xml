@@ -1,4 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<<<<<<< HEAD
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>gjuppen</groupId>
@@ -9,6 +10,49 @@
   
      <dependencies>
             <dependency>
+=======
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>gjuppen</groupId>
+  <artifactId>yubico</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+
+  <packaging>war</packaging>
+  
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+      <dependencies>
+        <dependency>
+>>>>>>> d22d659597e0455d78a5f8ea7f811bfc822eed8a
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
@@ -55,6 +99,7 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+<<<<<<< HEAD
         
         
   	<dependency>
@@ -100,4 +145,10 @@
   
   
 
+=======
+
+ 
+    </dependencies>
+  
+>>>>>>> d22d659597e0455d78a5f8ea7f811bfc822eed8a
 </project>
