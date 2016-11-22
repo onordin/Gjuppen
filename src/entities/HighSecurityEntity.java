@@ -1,16 +1,17 @@
-package models;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
 /**
- * The persistent class for the medium database table.
+ * The persistent class for the high database table.
  * 
  */
 @Entity
-@NamedQuery(name="Medium.findAll", query="SELECT m FROM Medium m")
-public class Medium implements Serializable {
+@Table(name="high")
+@NamedQuery(name="HighSecurityEntity.findAll", query="SELECT h FROM HighSecurityEntity h")
+public class HighSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,7 +21,9 @@ public class Medium implements Serializable {
 
 	private String username;
 
-	public Medium() {
+	private String yubico;
+
+	public HighSecurityEntity() {
 	}
 
 	public int getId() {
@@ -45,6 +48,14 @@ public class Medium implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getYubico() {
+		return this.yubico;
+	}
+
+	public void setYubico(String yubico) {
+		this.yubico = yubico;
 	}
 
 }

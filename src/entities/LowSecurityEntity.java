@@ -1,4 +1,4 @@
-package models;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -9,8 +9,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Low.findAll", query="SELECT l FROM Low l")
-public class Low implements Serializable {
+@Table(name="low")
+@NamedQuery(name="LowSecurityEntity.findAll", query="SELECT l FROM LowSecurityEntity l")
+public class LowSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,7 +21,7 @@ public class Low implements Serializable {
 
 	private String username;
 
-	public Low() {
+	public LowSecurityEntity() {
 	}
 
 	public int getId() {
