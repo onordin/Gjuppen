@@ -1,0 +1,15 @@
+
+#login1 {
+	border: 5px solid black;
+}
+
+.navbar-static-top {
+  margin-bottom: 0px;
+}
+
+.navbar-form > .form-group > .btn {
+	background-color: #800040;
+	color: black;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
