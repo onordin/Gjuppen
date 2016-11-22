@@ -2,7 +2,6 @@ package backingbeans;
 
 import java.io.Serializable;
 import java.util.Random;
-import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
