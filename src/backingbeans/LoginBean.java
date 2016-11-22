@@ -10,6 +10,9 @@ import com.yubico.client.v2.YubicoClient;
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
 
+
+
+
 @Named(value="loginBean")
 @SessionScoped
 public class LoginBean implements Serializable{
@@ -17,7 +20,7 @@ public class LoginBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1790365700380643675L;
+	private static final long serialVersionUID = 1790365700380643675L;
 	private String name;
 	private String password;
 	private String otp;
