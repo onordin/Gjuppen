@@ -54,9 +54,17 @@
 			
 	        <h:commandButton action="#{loginBean.login()}" value="Login"></h:commandButton>
 	        
+	        
+	        
 	        <br></br>
 	        
 	     </h:panelGrid>
+	    </h:form>
+	    
+	    <h:form id="temporary">
+	    <!-- Tillfällig knapp -->
+	        <br></br><br></br>
+	        <h:commandButton action="#{loginBean.createRandomLowUser()}" value="Create random user"></h:commandButton>
 	    </h:form>
 
 				</div>	<!-- end of login1 -->

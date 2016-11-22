@@ -9,8 +9,10 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="high")
-@NamedQuery(name="HighSecurityEntity.findAll", query="SELECT h FROM HighSecurityEntity h")
+@Table(name="high", schema="gjuppen")
+@NamedQueries({
+	@NamedQuery(name="HighSecurityEntity.getUserByUsername", query="SELECT u FROM HighSecurityEntity u WHERE u.username = :username")
+})
 public class HighSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
