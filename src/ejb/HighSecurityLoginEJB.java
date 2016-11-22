@@ -3,10 +3,13 @@ package ejb;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import dao.HighSecurityDAOBean;
 import ejbinterfaces.LocalHighLoginEJB;
 
-@EJB
 @Stateless
 public class HighSecurityLoginEJB implements LocalHighLoginEJB {
+	
+	@EJB
+	private HighSecurityDAOBean highSecurityDAOBean;
 
 }
