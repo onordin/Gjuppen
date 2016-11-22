@@ -2,9 +2,7 @@ package ejb;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.criteria.CriteriaBuilder.Trimspec;
 
-import com.sun.mail.iap.Response;
 import com.yubico.client.v2.VerificationResponse;
 import com.yubico.client.v2.YubicoClient;
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
