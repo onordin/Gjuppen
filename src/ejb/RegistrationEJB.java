@@ -67,7 +67,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			}
 			
 			high.setYubico(getYubicoId(otp));
-			if(!high.getYubico().equals("")){
+			if(!high.getYubico().equals(null)){
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
@@ -83,6 +83,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		boolean usernameValid = false;
 		boolean passwordValid = false;
 		if(!username.equals(null) || !username.trim().equals("")){
+			//TODO nån regex kolla så man inte skriver in sql kod tex
 			if(lowSecurityDAOBean.getUserByUsername(username) == null || mediumSecurityDAOBean.getUserByUsername(username) == null
 					|| highSecurityDAOBean.getUserByUsername(username) == null) {
 				
@@ -108,7 +109,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 
 	private String getYubicoId(String otp) {
 		YubicoClient yubicoClient = YubicoClient.getClient(clientId, secretKey);
-		String yubicoId = "";
+		String yubicoId = null;
 			try {
 				VerificationResponse response = yubicoClient.verify(otp);
 				if(response.isOk()){
