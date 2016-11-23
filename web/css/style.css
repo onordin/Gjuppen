@@ -1,6 +1,8 @@
 
-#login1 {
-	border: 5px solid black;
+.loginBox {
+	height: 200px;
+	border: 1px solid blue;
+	padding: 5px; 
 }
 
 .navbar-static-top {

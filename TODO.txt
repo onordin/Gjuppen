@@ -1,8 +1,14 @@
 Fråga hur vi ska göra med saltet till PKBDF2 i databasen. Ska vi spara det i separat tabell?
+JPQL istället för SQL (mer safe)
+DBMS password syns inte ändå i repository....
+borde vi ha sessionscoped på highsecurity-versionen?
+
+
 
 TODO
 Funktion för att kontrollera unikt yubico id för varje användare.
 Meddelanden i frontend efter validering.
 Fixa tre loginfunktioner.
 Fixa tre resultatsidor.
+
 

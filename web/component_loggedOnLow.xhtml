@@ -30,39 +30,25 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<div class="loginBox">
+			<div class="col-sm-12">
+			
+			
+			<h:outputText value="We have returned this username and password from our database:"></h:outputText>
+			<br/>
+			<h:outputText value="#{loginLow.lowSecurityEntity.username}"></h:outputText>
+			<br/>
+			<h:outputText value="#{loginLow.lowSecurityEntity.password}"></h:outputText>
+			<br/>
+			<h:outputText value="and anyone could have seen it on the way :)"></h:outputText>
+			
 
- 	   <h:form id="registration">
-    
-	    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
-	    
-	    	<h:outputLabel for="registrationName" value="Username:"></h:outputLabel>
-			<h:inputText id="registrationName" label="" value="#{registrationBean.username}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
-			
-			<h:outputLabel for="registrationPassword" value="Password:"></h:outputLabel>
-			<h:inputText id="registrationPassword" label="" value="#{registrationBean.password}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
-			
-			<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
-			<h:inputText id="registrationOTP" label="" value="#{registrationBean.otp}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
-			
-	        <h:commandButton action="#{registrationBean.register()}" value="Register"></h:commandButton>
-	        
-	        <br></br>
-	        
-	     </h:panelGrid>
-	    </h:form>
 
-				</div>	<!-- end of login1 -->
-			</div>	
-		</div>
+			</div>		
+		</div>	<!--  end of row -->
 	</div>	<!-- end of container -->
+
+
+
 
 			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
 			<script src="js/jquery-3.1.0.min.js" />
@@ -71,3 +57,4 @@
    	</h:body>
 
 </html>
+	    
