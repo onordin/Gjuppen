@@ -83,8 +83,12 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		boolean usernameValid = false;
 		boolean passwordValid = false;
 		if(!username.equals(null) || !username.trim().equals("")){
-			//TODO check if username is taken
-			usernameValid = true;
+			if(lowSecurityDAOBean.getUserByUsername(username) == null || mediumSecurityDAOBean.getUserByUsername(username) == null
+					|| highSecurityDAOBean.getUserByUsername(username) == null) {
+				
+				usernameValid = true;
+			}
+			
 		}
 		if(!password.equals(null) || !password.trim().equals("")){
 			passwordValid = true;

@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import entities.LowSecurityEntity;
 import entities.MediumSecurityEntity;
 import exceptions.DataNotFoundException;
 
@@ -29,7 +28,8 @@ public class MediumSecurityDAOBean {
 					.setParameter("username", username)
 					.getSingleResult();
 		} catch (NoResultException nre) {
-			throw new DataNotFoundException("No such username ("+username+") in database.");
+			nre.printStackTrace();
+			return null;
 		}
 	}
 }

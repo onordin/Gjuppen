@@ -28,7 +28,8 @@ public class LowSecurityDAOBean {
 					.setParameter("username", username)
 					.getSingleResult();
 		} catch (NoResultException nre) {
-			throw new DataNotFoundException("No such username ("+username+") in database.");
+			nre.printStackTrace();
+			return null;
 		}
 	}
 
