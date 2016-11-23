@@ -3,7 +3,7 @@ package ejb;
 import javax.ejb.Stateless;
 
 import dao.MediumSecurityDAOBean;
-import ejbinterfaces.LocalMediumLoginEJB;
+import ejb.interfaces.LocalMediumLoginEJB;
 
 import javax.ejb.EJB;
 

@@ -1,4 +1,4 @@
-package ejbinterfaces;
+package ejb.interfaces;
 
 import javax.ejb.Local;
 

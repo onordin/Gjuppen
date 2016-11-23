@@ -1,5 +1,9 @@
 package ejb;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -11,7 +15,8 @@ import com.yubico.client.v2.exceptions.YubicoVerificationException;
 import dao.HighSecurityDAOBean;
 import dao.LowSecurityDAOBean;
 import dao.MediumSecurityDAOBean;
-import ejbinterfaces.LocalRegistrationEJB;
+import ejb.interfaces.LocalRegistrationEJB;
+import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
 import entities.LowSecurityEntity;
 import entities.MediumSecurityEntity;
@@ -45,8 +50,25 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			
 			HighSecurityEntity high = new HighSecurityEntity();
 			high.setUsername(username);
-			// TODO password hash
-			high.setPassword(password);
+			
+			try {
+				String hashedPassword = PBKDF2.generateHashedPassword(password);
+				high.setPassword(hashedPassword);
+				System.out.println("Hashed password = " +hashedPassword);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			} catch (NoSuchProviderException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			} catch (InvalidKeySpecException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
 			high.setYubico(getYubicoId(otp));
 			if(!high.getYubico().equals("")){
 				highSecurityDAOBean.saveUser(high);
