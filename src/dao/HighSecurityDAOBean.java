@@ -6,7 +6,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import entities.HighSecurityEntity;
-import entities.LowSecurityEntity;
 import exceptions.DataNotFoundException;
 
 @Stateless
@@ -29,7 +28,9 @@ public class HighSecurityDAOBean {
 					.setParameter("username", username)
 					.getSingleResult();
 		} catch (NoResultException nre) {
-			throw new DataNotFoundException("No such username ("+username+") in database.");
+				nre.printStackTrace();
+				return null;
+			
 		}
 	}
 

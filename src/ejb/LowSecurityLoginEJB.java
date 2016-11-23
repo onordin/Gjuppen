@@ -4,7 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dao.LowSecurityDAOBean;
-import ejbinterfaces.LocalLowLoginEJB;
+import ejb.interfaces.LocalLowLoginEJB;
 
 @Stateless
 public class LowSecurityLoginEJB implements LocalLowLoginEJB{

@@ -4,7 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dao.HighSecurityDAOBean;
-import ejbinterfaces.LocalHighLoginEJB;
+import ejb.interfaces.LocalHighLoginEJB;
 
 @Stateless
 public class HighSecurityLoginEJB implements LocalHighLoginEJB {
@@ -12,4 +12,6 @@ public class HighSecurityLoginEJB implements LocalHighLoginEJB {
 	@EJB
 	private HighSecurityDAOBean highSecurityDAOBean;
 
+	
 }
+

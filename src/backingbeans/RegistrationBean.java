@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-import ejbinterfaces.LocalRegistrationEJB;
+import ejb.interfaces.LocalRegistrationEJB;
 
 @Named(value="registrationBean")
 @RequestScoped

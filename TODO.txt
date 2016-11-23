@@ -1,0 +1,8 @@
+Fråga hur vi ska göra med saltet till PKBDF2 i databasen. Ska vi spara det i separat tabell?
+
+TODO
+Funktion för att kontrollera unikt yubico id för varje användare.
+Meddelanden i frontend efter validering.
+Fixa tre loginfunktioner.
+Fixa tre resultatsidor.
+
