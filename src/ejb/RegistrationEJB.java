@@ -16,6 +16,7 @@ import dao.HighSecurityDAOBean;
 import dao.LowSecurityDAOBean;
 import dao.MediumSecurityDAOBean;
 import ejb.interfaces.LocalRegistrationEJB;
+import ejb.passwordencryption.MD5;
 import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
 import entities.LowSecurityEntity;
@@ -45,8 +46,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			
 			MediumSecurityEntity medium = new MediumSecurityEntity();
 			medium.setUsername(username);
-			//TODO password hash
-			medium.setPassword(password);
+			medium.setPassword(MD5.getMD5(password));
 			
 			HighSecurityEntity high = new HighSecurityEntity();
 			high.setUsername(username);
@@ -56,15 +56,12 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				high.setPassword(hashedPassword);
 				System.out.println("Hashed password = " +hashedPassword);
 			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			} catch (NoSuchProviderException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			} catch (InvalidKeySpecException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
