@@ -28,8 +28,21 @@ public class LowSecurityDAOBean {
 					.setParameter("username", username)
 					.getSingleResult();
 		} catch (NoResultException nre) {
-			throw new DataNotFoundException("No such username ("+username+") in database.");
+			//throw new DataNotFoundException("No such username ("+username+") in database.");
+			return null;
 		}
+	}
+
+	public boolean deleteUser(String deleteme) {
+		try {
+			LowSecurityEntity user = getUserByUsername(deleteme);
+			em.remove(user);
+			return true;
+		} catch (NoResultException nre) {
+			//throw new DataNotFoundException("No such username ("+username+") in database.");
+			return false;
+		}
+		
 	}
 
 }
