@@ -40,7 +40,6 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	@Override
 	public boolean registerUser(String username, String password, String otp) {
 		if(validateUser(username, password, otp)){
-			System.out.println("ehudeudhuhudheuhdeuhdeuh");
 			LowSecurityEntity low = new LowSecurityEntity();
 			low.setUsername(username);
 			low.setPassword(password);

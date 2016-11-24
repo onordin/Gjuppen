@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import entities.LowSecurityEntity;
-import exceptions.DataNotFoundException;
+import entities.MediumSecurityEntity;
 
 @Stateless
 public class LowSecurityDAOBean {
@@ -22,12 +22,18 @@ public class LowSecurityDAOBean {
 		}
 	}
 	
-	public LowSecurityEntity getUserByUsername(String username) throws DataNotFoundException {
+	public LowSecurityEntity getUserByUsername(String username) {
 		try {
-			return (LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
+			LowSecurityEntity lowSecurityEntity = 
+					(LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
-		} catch (NoResultException nre) {nre.printStackTrace();
+			if(!lowSecurityEntity.equals(null)) {
+				return lowSecurityEntity;
+			} 
+			return null;
+		} catch (NoResultException nre) {
+			//nre.printStackTrace();
 			return null;
 		}
 	}

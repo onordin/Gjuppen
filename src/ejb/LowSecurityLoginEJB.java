@@ -3,7 +3,6 @@ package ejb;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.apache.taglibs.standard.tag.el.sql.SetDataSourceTag;
 
 import dao.LowSecurityDAOBean;
 import displayEntities.LowSecurityDisplayEntity;
