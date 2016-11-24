@@ -33,5 +33,14 @@ public class HighSecurityDAOBean {
 			
 		}
 	}
+	
+	public HighSecurityEntity getUserByYubicoId(String yubicoId) throws DataNotFoundException {
+		try {
+			return (HighSecurityEntity) em.createNamedQuery("HighSecurityEntity.getUserByYubicoId").setParameter("yubico", yubicoId).getSingleResult();
+		} catch (NoResultException nre) {
+			nre.printStackTrace();
+			return null;
+		}
+	}
 
 }

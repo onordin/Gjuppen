@@ -68,10 +68,13 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			
 			high.setYubico(getYubicoId(otp));
 			if(!high.getYubico().equals(null)){
-				highSecurityDAOBean.saveUser(high);
-				lowSecurityDAOBean.saveUser(low);
-				mediumSecurityDAOBean.saveUser(medium);
-				return true;
+				//if(highSecurityDAOBean.getUserByYubicoId(high.getYubico()) == null) {
+					highSecurityDAOBean.saveUser(high);
+					lowSecurityDAOBean.saveUser(low);
+					mediumSecurityDAOBean.saveUser(medium);
+					return true;
+				//}
+				
 			}
 			
 		}
@@ -80,26 +83,33 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	}
 	
 	private boolean validateUser(String username, String password, String otp) {
-		boolean usernameValid = false;
-		boolean passwordValid = false;
-		if(!username.equals(null) || !username.trim().equals("")){
-			//TODO nån regex kolla så man inte skriver in sql kod tex
-			if(lowSecurityDAOBean.getUserByUsername(username) == null && mediumSecurityDAOBean.getUserByUsername(username) == null
-					&& highSecurityDAOBean.getUserByUsername(username) == null) {
-				
-				usernameValid = true;
-			}
-			
-		}
-		if(!password.equals(null) || !password.trim().equals("")){
-			passwordValid = true;
-		}
-		if(usernameValid && passwordValid && isOTPValid(otp)) {
+		
+		if(isUsernameValid(username) && isPasswordValid(password) && isOTPValid(otp)) {
 			return true;
 		}
 		
 		return false;
 			
+	}
+	
+	private boolean isUsernameValid(String username){
+		if(!username.equals(null) || !username.trim().equals("")){
+			
+			if(lowSecurityDAOBean.getUserByUsername(username) == null && mediumSecurityDAOBean.getUserByUsername(username) == null
+					&& highSecurityDAOBean.getUserByUsername(username) == null) {
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isPasswordValid(String password) {
+		if(!password.equals(null) || !password.trim().equals("")){
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private boolean isOTPValid(String otp){
