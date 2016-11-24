@@ -6,7 +6,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import entities.MediumSecurityEntity;
-import exceptions.DataNotFoundException;
 
 @Stateless
 public class MediumSecurityDAOBean {
@@ -22,13 +21,18 @@ public class MediumSecurityDAOBean {
 		}
 	}
 	
-	public MediumSecurityEntity getUserByUsername(String username) throws DataNotFoundException {
+	public MediumSecurityEntity getUserByUsername(String username) {
 		try {
-			return (MediumSecurityEntity) em.createNamedQuery("MediumSecurityEntity.getUserByUsername")
+			MediumSecurityEntity mediumSecurityEntity = 
+					(MediumSecurityEntity) em.createNamedQuery("MediumSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
+			if(mediumSecurityEntity != null) {
+				return mediumSecurityEntity;
+			} 
+			return null;
 		} catch (NoResultException nre) {
-			nre.printStackTrace();
+			//nre.printStackTrace();
 			return null;
 		}
 	}

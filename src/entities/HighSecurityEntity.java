@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="high", schema="gjuppen")
 @NamedQueries({
-	@NamedQuery(name="HighSecurityEntity.getUserByUsername", query="SELECT u FROM HighSecurityEntity u WHERE u.username = :username")
+	@NamedQuery(name="HighSecurityEntity.getUserByUsername", query="SELECT u FROM HighSecurityEntity u WHERE u.username = :username"),
+	@NamedQuery(name="HighSecurityEntity.getUserByYubicoId", query="SELECT u FROM HighSecurityEntity u WHERE u.yubico = :yubico")
 })
 public class HighSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +25,8 @@ public class HighSecurityEntity implements Serializable {
 	private String username;
 
 	private String yubico;
+	
+	private String salt;
 
 	public HighSecurityEntity() {
 	}
@@ -58,6 +61,14 @@ public class HighSecurityEntity implements Serializable {
 
 	public void setYubico(String yubico) {
 		this.yubico = yubico;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

@@ -6,7 +6,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import entities.LowSecurityEntity;
-import exceptions.DataNotFoundException;
 
 @Stateless
 public class LowSecurityDAOBean {
@@ -22,15 +21,32 @@ public class LowSecurityDAOBean {
 		}
 	}
 	
-	public LowSecurityEntity getUserByUsername(String username) throws DataNotFoundException {
+	public LowSecurityEntity getUserByUsername(String username) {
 		try {
-			return (LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
+			LowSecurityEntity lowSecurityEntity = 
+					(LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
+			if(lowSecurityEntity != null) {
+				return lowSecurityEntity;
+			} 
+			return null;
 		} catch (NoResultException nre) {
-			nre.printStackTrace();
+			//nre.printStackTrace();
 			return null;
 		}
+	}
+
+	public boolean deleteUser(String deleteme) {
+		try {
+			LowSecurityEntity user = getUserByUsername(deleteme);
+			em.remove(user);
+			return true;
+		} catch (NoResultException nre) {
+			//throw new DataNotFoundException("No such username ("+username+") in database.");
+			return false;
+		}
+		
 	}
 
 }

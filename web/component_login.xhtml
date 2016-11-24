@@ -129,8 +129,29 @@
 	        <h:commandButton action="#{loginBean.createRandomLowUser()}" value="Create random user"></h:commandButton>
 	    </h:form>
 	    
-		
-	</div>	<!-- end of container -->
+
+	    <h:form id="temporary2">
+	    <!-- Tillfällig knapp -->
+	        <br></br><br></br>
+	        <h:outputLabel for="userexist" value="Enter username: "></h:outputLabel>
+			<h:inputText id="userexist" label="" value="#{loginBean.findme}" required="true"
+					requiredMessage="This field is required">	 
+			</h:inputText>
+	        <h:commandButton action="#{loginBean.findThisUser()}" value="See if user already exist"></h:commandButton>
+	    </h:form>
+	    
+	    <h:form id="temporary3">
+	    <!-- Tillfällig knapp -->
+	        <br></br><br></br>
+	        <h:outputLabel for="delete" value="Enter username: "></h:outputLabel>
+			<h:inputText id="delete" label="" value="#{loginBean.deleteme}" required="true"
+					requiredMessage="This field is required">	 
+			</h:inputText>
+	        <h:commandButton action="#{loginBean.deleteThisUser()}" value="Delete this user"></h:commandButton>
+	    </h:form>
+
+				</div>	<!-- end of login1 -->
+
 
 
 

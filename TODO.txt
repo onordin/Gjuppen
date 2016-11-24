@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+=======
+Frï¿½ga hur vi ska gï¿½ra med saltet till PKBDF2 i databasen. Ska vi spara det i separat tabell?
+JPQL istï¿½llet fï¿½r SQL (mer safe)
+DBMS password syns inte ï¿½ndï¿½ i repository....
+borde vi ha sessionscoped pï¿½ highsecurity-versionen?
+
+
+>>>>>>> refs/heads/yubicoid
 
 TODO
-Funktion för att kontrollera unikt yubico id för varje användare.
 Meddelanden i frontend efter validering.
 Fixa tre loginfunktioner.
 Fixa tre resultatsidor.
-
-

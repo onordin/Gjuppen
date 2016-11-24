@@ -10,15 +10,14 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 public class PBKDF2 {
+	
+	private static final int iterations = 5000;
 
-	public static String generateHashedPassword(String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
-		int iterations = 5000;
-		char[] chars = password.toCharArray();
-		byte[] salt = getSalt();
-		PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64*8);
+	public static String generateHashedPassword(char[] password, byte[] salt) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+		PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, 64*8);
 		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 		byte[] hash = skf.generateSecret(spec).getEncoded();		
-		return iterations + ":" + toHex(salt) + ":" + toHex(hash);
+		return toHex(hash);
 	}
 	
 	private static byte[] fromHex(String hex) {
@@ -29,7 +28,7 @@ public class PBKDF2 {
 		return bytes;
 	}
 	
-	private static String toHex(byte[] array) {
+	public static String toHex(byte[] array) {
 		BigInteger bi = new BigInteger(1, array);
 		String hex = bi.toString(16);
 		int paddingLength = (array.length *2) - hex.length();
@@ -48,18 +47,17 @@ public class PBKDF2 {
 	}
 	
 	// skicka in lösenordet man skrivit in. Jämför med det som är lagrat i db. sant eller falsk att de stämmer överens.
-		public static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
-			String[] parts = storedPassword.split(":");
-			int iterations = Integer.parseInt(parts[0]);
-			byte[] salt = fromHex(parts[1]);
-			byte[] hash = fromHex(parts[2]);
+		public static boolean validatePassword(String inputPassword, String storedPassword, String storedSalt) throws NoSuchAlgorithmException, InvalidKeySpecException {
 			
-			PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length*8);
+			byte[] salt = fromHex(storedSalt);
+			byte[] originalHash = fromHex(storedPassword);
+			
+			PBEKeySpec spec = new PBEKeySpec(inputPassword.toCharArray(), salt, iterations, originalHash.length*8);
 			SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 			byte[] testHash = skf.generateSecret(spec).getEncoded();
-			int diff = hash.length ^ testHash.length; // ^ betyder eller. Om diff blir noll så är längden rätt på lösenordet.
-			for(int i=0; i<hash.length && i<testHash.length; i++) {
-				diff |= hash[i] ^testHash[i]; //jämför bytes steg för steg |= ökar eller minskar. Om någon plats skiljer sig får diff ett nytt värde.
+			int diff = originalHash.length ^ testHash.length; // ^ betyder eller. Om diff blir noll så är längden rätt på lösenordet.
+			for(int i=0; i<originalHash.length && i<testHash.length; i++) {
+				diff |= originalHash[i] ^testHash[i]; //jämför bytes steg för steg |= ökar eller minskar. Om någon plats skiljer sig får diff ett nytt värde.
 			}
 			// om diff fortfarande är noll så är även innehållet korrekt.
 			// målet är att diff ska bli noll. Då stämmer det inmatade lösenordet med det sparade.
