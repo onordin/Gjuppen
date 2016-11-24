@@ -3,7 +3,10 @@ package ejb;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.taglibs.standard.tag.el.sql.SetDataSourceTag;
+
 import dao.LowSecurityDAOBean;
+import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
 
@@ -14,12 +17,17 @@ public class LowSecurityLoginEJB implements LocalLowLoginEJB{
 	private LowSecurityDAOBean lowSecurityDAOBean;
 
 	@Override
-	public LowSecurityEntity login(String username, String password) {
+	public LowSecurityDisplayEntity login(String username, String password) {
 		
+		LowSecurityDisplayEntity entityToReturn;
 		LowSecurityEntity lowSecurityEntity = lowSecurityDAOBean.getUserByUsername(username);
+		
 		if(lowSecurityEntity != null) {
 			if(lowSecurityEntity.getPassword().equals(password)) {
-				return lowSecurityEntity;
+				entityToReturn = new LowSecurityDisplayEntity();
+				entityToReturn.setUsername(lowSecurityEntity.getUsername());
+				entityToReturn.setPassword(lowSecurityEntity.getPassword());
+				return entityToReturn;
 			}
 		}
 		return null;

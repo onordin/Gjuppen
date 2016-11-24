@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
 
@@ -17,10 +18,23 @@ public class LoginLowSecurityBean implements Serializable {
 
 	private String username;
 	private String password;
-	private LowSecurityEntity lowSecurityEntity;
+	private LowSecurityDisplayEntity lowSecurityDisplayEntity;
 	private String firstCharPassword;
+
+	@EJB
+	private LocalLowLoginEJB lowLoginEJB;
 	
 	
+	
+	
+	public LowSecurityDisplayEntity getLowSecurityDisplayEntity() {
+		return lowSecurityDisplayEntity;
+	}
+
+	public void setLowSecurityDisplayEntity(LowSecurityDisplayEntity lowSecurityDisplayEntity) {
+		this.lowSecurityDisplayEntity = lowSecurityDisplayEntity;
+	}
+
 	public String getFirstCharPassword() {
 		return firstCharPassword;
 	}
@@ -28,17 +42,6 @@ public class LoginLowSecurityBean implements Serializable {
 	public void setFirstCharPassword(String firstCharPassword) {
 		this.firstCharPassword = firstCharPassword;
 	}
-
-	public LowSecurityEntity getLowSecurityEntity() {
-		return lowSecurityEntity;
-	}
-
-	public void setLowSecurityEntity(LowSecurityEntity lowSecurityEntity) {
-		this.lowSecurityEntity = lowSecurityEntity;
-	}
-
-	@EJB
-	private LocalLowLoginEJB lowLoginEJB;
 
 	public String getUsername() {
 		return username;
@@ -56,11 +59,12 @@ public class LoginLowSecurityBean implements Serializable {
 		this.password = password;
 	}
 	
+	
 	public String login() {
-		LowSecurityEntity returnedEntity = lowLoginEJB.login(username, password);
+		LowSecurityDisplayEntity returnedEntity = lowLoginEJB.login(username, password);
 		
 		if(returnedEntity != null) {
-			this.lowSecurityEntity = returnedEntity;
+			this.lowSecurityDisplayEntity = returnedEntity;
 			firstCharPassword = returnedEntity.getPassword().substring(0, 1); 
 			return "loggedOnLowSecurity";
 		}else {
