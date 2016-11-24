@@ -84,8 +84,8 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		boolean passwordValid = false;
 		if(!username.equals(null) || !username.trim().equals("")){
 			//TODO nån regex kolla så man inte skriver in sql kod tex
-			if(lowSecurityDAOBean.getUserByUsername(username) == null || mediumSecurityDAOBean.getUserByUsername(username) == null
-					|| highSecurityDAOBean.getUserByUsername(username) == null) {
+			if(lowSecurityDAOBean.getUserByUsername(username) == null && mediumSecurityDAOBean.getUserByUsername(username) == null
+					&& highSecurityDAOBean.getUserByUsername(username) == null) {
 				
 				usernameValid = true;
 			}
