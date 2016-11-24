@@ -7,4 +7,6 @@ public interface LocalRegistrationEJB {
 
 	boolean registerUser(String username, String password, String otp);
 
+	void deleteAllUsers();
+
 }

@@ -6,6 +6,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import ejb.interfaces.LocalHighLoginEJB;
+import ejb.interfaces.LocalLowLoginEJB;
+import ejb.interfaces.LocalMediumLoginEJB;
 import ejb.interfaces.LocalRegistrationEJB;
 
 @Named(value="registrationBean")
@@ -20,6 +23,7 @@ public class RegistrationBean implements Serializable {
 	
 	@EJB
 	private LocalRegistrationEJB localRegistrationEJB;
+	
 	
 	public String getUsername() {
 		return username;
@@ -60,6 +64,11 @@ public class RegistrationBean implements Serializable {
 			return "";
 		}
 		System.out.println("gick inte bra");
+		return "";
+	}
+	
+	public String deleteAllUsers() {
+		localRegistrationEJB.deleteAllUsers();
 		return "";
 	}
 

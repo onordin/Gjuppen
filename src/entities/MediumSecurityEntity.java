@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="medium", schema="gjuppen")
 @NamedQueries({
-	@NamedQuery(name="MediumSecurityEntity.getUserByUsername", query="SELECT u FROM MediumSecurityEntity u WHERE u.username = :username")
+	@NamedQuery(name="MediumSecurityEntity.getUserByUsername", query="SELECT u FROM MediumSecurityEntity u WHERE u.username = :username"),
+	@NamedQuery(name="MediumSecurityEntity.findAll", query="SELECT u FROM MediumSecurityEntity u")
 })
 public class MediumSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

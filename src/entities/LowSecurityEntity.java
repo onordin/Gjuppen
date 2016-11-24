@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="low", schema="gjuppen")
 @NamedQueries({
-	@NamedQuery(name="LowSecurityEntity.getUserByUsername", query="SELECT u FROM LowSecurityEntity u WHERE u.username = :username")
+	@NamedQuery(name="LowSecurityEntity.getUserByUsername", query="SELECT u FROM LowSecurityEntity u WHERE u.username = :username"),
+	@NamedQuery(name="LowSecurityEntity.findAll", query="SELECT u FROM LowSecurityEntity u")
 })
 public class LowSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

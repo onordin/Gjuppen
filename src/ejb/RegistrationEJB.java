@@ -150,4 +150,14 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		return yubicoId;
 	}
 
+	@Override
+	public void deleteAllUsers() {
+		lowSecurityDAOBean.deleteAllUsers();
+		mediumSecurityDAOBean.deleteAllUsers();
+		highSecurityDAOBean.deleteAllUsers();
+		message.successMsg("All users deleted");
+	}
+	
 }
+
+
