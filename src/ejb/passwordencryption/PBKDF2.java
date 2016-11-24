@@ -19,6 +19,7 @@ public class PBKDF2 {
 		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 		byte[] hash = skf.generateSecret(spec).getEncoded();		
 		return iterations + ":" + toHex(salt) + ":" + toHex(hash);
+		//reutnera som Base64.encodeBase64String(hash)
 	}
 	
 	private static byte[] fromHex(String hex) {
