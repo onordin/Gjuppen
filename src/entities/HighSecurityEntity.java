@@ -24,6 +24,8 @@ public class HighSecurityEntity implements Serializable {
 	private String username;
 
 	private String yubico;
+	
+	private String salt;
 
 	public HighSecurityEntity() {
 	}
@@ -58,6 +60,14 @@ public class HighSecurityEntity implements Serializable {
 
 	public void setYubico(String yubico) {
 		this.yubico = yubico;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

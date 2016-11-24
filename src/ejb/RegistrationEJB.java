@@ -40,6 +40,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	@Override
 	public boolean registerUser(String username, String password, String otp) {
 		if(validateUser(username, password, otp)){
+			System.out.println("ehudeudhuhudheuhdeuhdeuh");
 			LowSecurityEntity low = new LowSecurityEntity();
 			low.setUsername(username);
 			low.setPassword(password);
@@ -50,11 +51,13 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			
 			HighSecurityEntity high = new HighSecurityEntity();
 			high.setUsername(username);
+			System.out.println("kommer man hit?");
 			
 			try {
-				String hashedPassword = PBKDF2.generateHashedPassword(password);
-				high.setPassword(hashedPassword);
-				System.out.println("Hashed password = " +hashedPassword);
+				byte[] salt = PBKDF2.getSalt();
+				char[] passwordAsChar = password.toCharArray();
+				high.setSalt(PBKDF2.toHex(salt));
+				high.setPassword(PBKDF2.generateHashedPassword(passwordAsChar, salt));
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 				return false;
