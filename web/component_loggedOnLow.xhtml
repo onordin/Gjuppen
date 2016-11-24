@@ -33,13 +33,15 @@
 			<div class="col-sm-12">
 			
 			
-			<h:outputText value="We have returned this username and password from our database:"></h:outputText>
+			<h:outputText value="We have returned this username from our database:"></h:outputText>
 			<br/>
-			<h:outputText value="#{loginLow.lowSecurityEntity.username}"></h:outputText>
+			<h:outputText class="outPutHighlight" value="#{loginLow.lowSecurityEntity.username}"></h:outputText>
 			<br/>
-			<h:outputText value="#{loginLow.lowSecurityEntity.password}"></h:outputText>
+			<h:outputText value="Your password starts with the following letter:"></h:outputText>
 			<br/>
-			<h:outputText value="and anyone could have seen it on the way :)"></h:outputText>
+			<h:outputText class="outPutHighlight" value="#{loginLow.firstCharPassword}"></h:outputText>
+			<br/>
+			<h:outputText value="(We sent it to and from our server without encrypting it... very lazy and sneaky :p  )"></h:outputText>
 			
 
 

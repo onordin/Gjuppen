@@ -18,7 +18,17 @@ public class LoginLowSecurityBean implements Serializable {
 	private String username;
 	private String password;
 	private LowSecurityEntity lowSecurityEntity;
+	private String firstCharPassword;
 	
+	
+	public String getFirstCharPassword() {
+		return firstCharPassword;
+	}
+
+	public void setFirstCharPassword(String firstCharPassword) {
+		this.firstCharPassword = firstCharPassword;
+	}
+
 	public LowSecurityEntity getLowSecurityEntity() {
 		return lowSecurityEntity;
 	}
@@ -51,6 +61,7 @@ public class LoginLowSecurityBean implements Serializable {
 		
 		if(returnedEntity != null) {
 			this.lowSecurityEntity = returnedEntity;
+			firstCharPassword = returnedEntity.getPassword().substring(0, 1); 
 			return "loggedOnLowSecurity";
 		}else {
 			return "";
