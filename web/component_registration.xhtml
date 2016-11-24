@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<div id="login1">
+				<div class="loginBox">
 
  	   <h:form id="registration">
     
@@ -46,17 +46,18 @@
 			<h:inputText id="registrationPassword" label="" value="#{registrationBean.password}" required="true"
 					requiredMessage="This field is required">	 
 			</h:inputText>
+		
 			
 			<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
 			<h:inputText id="registrationOTP" label="" value="#{registrationBean.otp}" required="true"
 					requiredMessage="This field is required">	 
 			</h:inputText>
 			
+			</h:panelGrid>
+			
 	        <h:commandButton action="#{registrationBean.register()}" value="Register"></h:commandButton>
-	        
-	        <br></br>
-	        
-	     </h:panelGrid>
+	       	<br/>
+	       
 	    </h:form>
 
 				</div>	<!-- end of login1 -->

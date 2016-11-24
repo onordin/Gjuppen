@@ -28,31 +28,33 @@
 
 	<h:body>
 	
-	
 	<div class="container">
-
-	    <div class="navbar navbar-inverse navbar-static-top">
-	     	 <div class="navbar-header">
-	         
-	          <a class="navbar-brand title" href="startpage.xhtml">Home</a>
-	        
-	        </div>
-	      
-	      
-	    </div>
-	    
-	    
-		<div class="jumbotron">
-	    	<h1 id="jumbotron">Gjuppjummet</h1>
-      	</div>
-      	
-     </div> 	
-    
+		<div class="row">
+			<div class="col-sm-12">
+			
+			
+			<h:outputText value="We have returned this username from our database:"></h:outputText>
+			<br/>
+			<h:outputText class="outPutHighlight" value="#{loginLow.lowSecurityEntity.username}"></h:outputText>
+			<br/>
+			<h:outputText value="Your password starts with the following letter:"></h:outputText>
+			<br/>
+			<h:outputText class="outPutHighlight" value="#{loginLow.firstCharPassword}"></h:outputText>
+			<br/>
+			<h:outputText value="(We sent it to and from our server without encrypting it... very lazy and sneaky :p  )"></h:outputText>
+			
 
 
-		<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
-		<script src="js/jquery-3.1.0.min.js" />
-		<script src="js/bootstrap.min.js" />
+			</div>		
+		</div>	<!--  end of row -->
+	</div>	<!-- end of container -->
+
+
+
+
+			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
+			<script src="js/jquery-3.1.0.min.js" />
+			<script src="js/bootstrap.min.js" />
 
    	</h:body>
 

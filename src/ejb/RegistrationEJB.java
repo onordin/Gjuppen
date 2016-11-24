@@ -16,6 +16,7 @@ import dao.HighSecurityDAOBean;
 import dao.LowSecurityDAOBean;
 import dao.MediumSecurityDAOBean;
 import ejb.interfaces.LocalRegistrationEJB;
+import ejb.passwordencryption.MD5;
 import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
 import entities.LowSecurityEntity;
@@ -45,8 +46,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			
 			MediumSecurityEntity medium = new MediumSecurityEntity();
 			medium.setUsername(username);
-			//TODO password hash
-			medium.setPassword(password);
+			medium.setPassword(MD5.getMD5(password));
 			
 			HighSecurityEntity high = new HighSecurityEntity();
 			high.setUsername(username);
@@ -56,21 +56,18 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				high.setPassword(hashedPassword);
 				System.out.println("Hashed password = " +hashedPassword);
 			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			} catch (NoSuchProviderException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			} catch (InvalidKeySpecException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
 			
 			high.setYubico(getYubicoId(otp));
-			if(!high.getYubico().equals("")){
+			if(!high.getYubico().equals(null)){
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
@@ -86,8 +83,13 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		boolean usernameValid = false;
 		boolean passwordValid = false;
 		if(!username.equals(null) || !username.trim().equals("")){
-			//TODO check if username is taken
-			usernameValid = true;
+			//TODO nån regex kolla så man inte skriver in sql kod tex
+			if(lowSecurityDAOBean.getUserByUsername(username) == null && mediumSecurityDAOBean.getUserByUsername(username) == null
+					&& highSecurityDAOBean.getUserByUsername(username) == null) {
+				
+				usernameValid = true;
+			}
+			
 		}
 		if(!password.equals(null) || !password.trim().equals("")){
 			passwordValid = true;
@@ -107,7 +109,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 
 	private String getYubicoId(String otp) {
 		YubicoClient yubicoClient = YubicoClient.getClient(clientId, secretKey);
-		String yubicoId = "";
+		String yubicoId = null;
 			try {
 				VerificationResponse response = yubicoClient.verify(otp);
 				if(response.isOk()){

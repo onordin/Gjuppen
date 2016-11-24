@@ -1,15 +1,52 @@
 
-#login1 {
-	border: 5px solid black;
-}
 
+
+/* Header  */
 .navbar-static-top {
   margin-bottom: 0px;
 }
 
-.navbar-form > .form-group > .btn {
+
+.navbar-static-top > .navbar-header > a:hover {
 	background-color: #800040;
-	color: black;
-	-webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    transition-duration: 0.4s; 
+  	-webkit-transition-duration: 0.4s; /* Safari */
+    color: white;
 }
+
+.outPutHighlight {
+	font-size: 2em;
+	color: red;
+}
+
+
+#jumbotron:hover {
+
+}
+
+
+
+/*  Login  */
+.loginBox {
+	height: 200px;
+	border: 1px solid blue;
+	padding: 5px; 
+}
+
+
+#login1 {
+	background-color: #f8a094;
+}
+
+
+
+#login2 {
+	background-color: #ffffc1;
+}
+
+
+
+#login3 {
+	background-color: #a8ffac;
+}
+

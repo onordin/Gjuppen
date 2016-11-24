@@ -30,43 +30,106 @@
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<div id="login1">
 
- 	   <h:form id="login">
-    
-	    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
-	    
-	    	<h:outputLabel for="loginName" value="Name:"></h:outputLabel>
-			<h:inputText id="loginName" label="" value="#{loginBean.name}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
+			<div class="col-sm-4">
+				<div id="login1" class="loginBox">
+				<h4>Login Low Security</h4>
+			 	   <h:form>
+		    
+				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+			    
+			    	<h:outputLabel for="login1Username" value="Username:"></h:outputLabel>
+					<h:inputText id="login1Username" label="" value="#{loginLow.username}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					<h:outputLabel for="login1Password" value="Password:"></h:outputLabel>
+					<h:inputText id="login1Password" label="" value="#{loginLow.password}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					 <h:commandButton action="#{loginLow.login()}" value="Login"></h:commandButton>
+			     
+			    	 </h:panelGrid>
+			    </h:form>
+			    
+				</div>	<!-- end of loginBox -->
+			</div>		
 			
-			<h:outputLabel for="loginPassword" value="Password:"></h:outputLabel>
-			<h:inputText id="loginPassword" label="" value="#{loginBean.password}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
 			
-			<h:outputLabel for="loginOTP" value="Yubico key:"></h:outputLabel>
-			<h:inputText id="loginOTP" label="" value="#{loginBean.otp}" required="true"
-					requiredMessage="This field is required">	 
-			</h:inputText>
 			
-	        <h:commandButton action="#{loginBean.login()}" value="Login"></h:commandButton>
-	        
-	        
-	        
+			<div class="col-sm-4">
+				<div id="login2" class="loginBox">
+				<h4>Login Medium Security</h4>
+			 	   <h:form>
+		    
+				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+			    
+			    	<h:outputLabel for="login2Username" value="Username:"></h:outputLabel>
+					<h:inputText id="login2Username" label="" value="#{loginMedium.username}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					<h:outputLabel for="login2Password" value="Password:"></h:outputLabel>
+					<h:inputText id="login2Password" label="" value="#{loginMedium.password}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+	
+	
+			        <h:commandButton action="#{loginBean.login()}" value="Login"></h:commandButton>
+			     
+			    	 </h:panelGrid>
+			    </h:form>
+			    
+				</div>	<!-- end of loginBox -->
+			</div>		
+			
+			
+			
+			<div class="col-sm-4">
+				<div id="login3" class="loginBox">
+				<h4>Login High Security</h4>
+					<h:form>
+		    
+				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+			    
+			    	<h:outputLabel for="login3Username" value="Username:"></h:outputLabel>
+					<h:inputText id="login3Username" label="" value="#{loginHigh.username}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					<h:outputLabel for="login3Password" value="Password:"></h:outputLabel>
+					<h:inputText id="login3Password" label="" value="#{loginHigh.password}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					<h:outputLabel for="loginOTP" value="Yubico key:"></h:outputLabel>
+					<h:inputText id="loginOTP" label="" value="#{loginHigh.otp}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+			        <h:commandButton action="#{loginBean.login()}" value="Login"></h:commandButton>
+			     
+			    	 </h:panelGrid>
+			    </h:form>
+			    
+				</div>	<!-- end of loginBox -->
+			</div>		
+			
+			
+		</div>	<!--  end of row -->
+		
+		
+			        
 	        <br></br>
 	        
-	     </h:panelGrid>
-	    </h:form>
-	    
 	    <h:form id="temporary">
 	    <!-- Tillfällig knapp -->
 	        <br></br><br></br>
 	        <h:commandButton action="#{loginBean.createRandomLowUser()}" value="Create random user"></h:commandButton>
 	    </h:form>
 	    
+
 	    <h:form id="temporary2">
 	    <!-- Tillfällig knapp -->
 	        <br></br><br></br>
@@ -91,6 +154,9 @@
 			</div>	
 		</div>
 	</div>	<!-- end of container -->
+
+
+
 
 			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
 			<script src="js/jquery-3.1.0.min.js" />

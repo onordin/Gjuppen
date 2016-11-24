@@ -151,6 +151,7 @@ public class LoginBean implements Serializable{
 		Random rand = new Random();
 		int locationInArray = rand.nextInt(35)+1;
 		String username = randomNames[locationInArray-1];
+
 		String password = "password";
 		LowSecurityEntity lowSecurityUser = new LowSecurityEntity();
 		lowSecurityUser.setUsername(username);

@@ -27,8 +27,7 @@ public class LowSecurityDAOBean {
 			return (LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
-		} catch (NoResultException nre) {
-			//throw new DataNotFoundException("No such username ("+username+") in database.");
+		} catch (NoResultException nre) {nre.printStackTrace();
 			return null;
 		}
 	}
