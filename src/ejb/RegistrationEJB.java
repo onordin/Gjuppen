@@ -140,8 +140,10 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			}
 			message.errorMsg("Invalid OTP");
 		} catch (YubicoVerificationException yve) {
+			yve.printStackTrace();
 			return yubicoId;
 		} catch (YubicoValidationFailure yvf) {
+			yvf.printStackTrace();
 			return yubicoId;
 		}
 

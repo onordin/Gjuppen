@@ -27,7 +27,7 @@ public class MediumSecurityDAOBean {
 					(MediumSecurityEntity) em.createNamedQuery("MediumSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
-			if(!mediumSecurityEntity.equals(null)) {
+			if(mediumSecurityEntity != null) {
 				return mediumSecurityEntity;
 			} 
 			return null;

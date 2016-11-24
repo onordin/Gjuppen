@@ -27,7 +27,7 @@ public class LowSecurityDAOBean {
 					(LowSecurityEntity) em.createNamedQuery("LowSecurityEntity.getUserByUsername")
 					.setParameter("username", username)
 					.getSingleResult();
-			if(!lowSecurityEntity.equals(null)) {
+			if(lowSecurityEntity != null) {
 				return lowSecurityEntity;
 			} 
 			return null;

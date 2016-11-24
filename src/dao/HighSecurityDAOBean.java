@@ -26,7 +26,7 @@ public class HighSecurityDAOBean {
 			HighSecurityEntity highSecurityEntity = (HighSecurityEntity) em
 					.createNamedQuery("HighSecurityEntity.getUserByUsername").setParameter("username", username)
 					.getSingleResult();
-			if (!highSecurityEntity.equals(null)) {
+			if (highSecurityEntity != null) {
 				return highSecurityEntity;
 			}
 			return null;
@@ -38,8 +38,12 @@ public class HighSecurityDAOBean {
 
 	public HighSecurityEntity getUserByYubicoId(String yubicoId) {
 		try {
-			return (HighSecurityEntity) em.createNamedQuery("HighSecurityEntity.getUserByYubicoId")
+			HighSecurityEntity highSecurityEntity = (HighSecurityEntity) em.createNamedQuery("HighSecurityEntity.getUserByYubicoId")
 					.setParameter("yubico", yubicoId).getSingleResult();
+			if (highSecurityEntity != null) {
+				return highSecurityEntity;
+			}
+			return null;
 		} catch (NoResultException nre) {
 			return null;
 		}
