@@ -6,7 +6,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import entities.LowSecurityEntity;
-import entities.MediumSecurityEntity;
 
 @Stateless
 public class LowSecurityDAOBean {

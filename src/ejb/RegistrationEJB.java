@@ -21,6 +21,7 @@ import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
 import entities.LowSecurityEntity;
 import entities.MediumSecurityEntity;
+import messageservice.MessageService;
 
 @Stateless
 public class RegistrationEJB implements LocalRegistrationEJB {
@@ -37,21 +38,22 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	@EJB
 	private LowSecurityDAOBean lowSecurityDAOBean;
 
+	@EJB
+	private MessageService message;
+
 	@Override
 	public boolean registerUser(String username, String password, String otp) {
-		if(validateUser(username, password, otp)){
+		if (validateUser(username, password, otp)) {
 			LowSecurityEntity low = new LowSecurityEntity();
 			low.setUsername(username);
 			low.setPassword(password);
-			
+
 			MediumSecurityEntity medium = new MediumSecurityEntity();
 			medium.setUsername(username);
 			medium.setPassword(MD5.getMD5(password));
-			
+
 			HighSecurityEntity high = new HighSecurityEntity();
 			high.setUsername(username);
-			System.out.println("kommer man hit?");
-			
 			try {
 				byte[] salt = PBKDF2.getSalt();
 				char[] passwordAsChar = password.toCharArray();
@@ -67,64 +69,81 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				e.printStackTrace();
 				return false;
 			}
-			
-			high.setYubico(getYubicoId(otp));
-			if(!high.getYubico().equals(null)){
+
+			String yubicoId = getYubicoIdFromOTP(otp);
+
+			if (yubicoId != null) {
+				// if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null)
+				// {
+				high.setYubico(yubicoId);
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
+				message.successMsg("Registration Successful");
 				return true;
+				// }
+				// message.errorMsg("YubiKey already in use");
 			}
-			
+
 		}
-		
 		return false;
 	}
-	
+
 	private boolean validateUser(String username, String password, String otp) {
-		boolean usernameValid = false;
-		boolean passwordValid = false;
-		if(!username.equals(null) || !username.trim().equals("")){
-			//TODO nån regex kolla så man inte skriver in sql kod tex
-			if(lowSecurityDAOBean.getUserByUsername(username) == null && mediumSecurityDAOBean.getUserByUsername(username) == null
-					&& highSecurityDAOBean.getUserByUsername(username) == null) {
-				
-				usernameValid = true;
-			}
-			
-		}
-		if(!password.equals(null) || !password.trim().equals("")){
-			passwordValid = true;
-		}
-		if(usernameValid && passwordValid && isOTPValid(otp)) {
+
+		if (isUsernameValid(username) && isPasswordValid(password) && isOTPValid(otp)) {
 			return true;
 		}
-		
 		return false;
-			
 	}
-	
-	private boolean isOTPValid(String otp){
+
+	private boolean isUsernameValid(String username) {
+		if (!username.trim().equals("")) {
+
+			if (lowSecurityDAOBean.getUserByUsername(username) == null
+					&& mediumSecurityDAOBean.getUserByUsername(username) == null
+					&& highSecurityDAOBean.getUserByUsername(username) == null) {
+
+				return true;
+			}
+			message.errorMsg("Username taken");
+			return false;
+		}
+		message.errorMsg("Username required");
+		return false;
+	}
+
+	private boolean isPasswordValid(String password) {
+		if (!password.trim().equals("")) {
+			return true;
+		}
+		message.errorMsg("Password required");
+		return false;
+	}
+
+	private boolean isOTPValid(String otp) {
 		boolean validOTP = YubicoClient.isValidOTPFormat(otp);
+		if (validOTP == false) {
+			message.errorMsg("Invalid OTP-format");
+		}
 		return validOTP;
 	}
 
-	private String getYubicoId(String otp) {
+	private String getYubicoIdFromOTP(String otp) {
 		YubicoClient yubicoClient = YubicoClient.getClient(clientId, secretKey);
 		String yubicoId = null;
-			try {
-				VerificationResponse response = yubicoClient.verify(otp);
-				if(response.isOk()){
-					yubicoId = YubicoClient.getPublicId(otp);
-					return yubicoId;
-				}
-			} catch (YubicoVerificationException e) {
-				System.out.println("YubicoVerificationException " + e);
-				return yubicoId;
-			} catch (YubicoValidationFailure e) {
-				System.out.println("YubicoValidationFailure " + e);
+		try {
+			VerificationResponse response = yubicoClient.verify(otp);
+			if (response.isOk()) {
+				yubicoId = YubicoClient.getPublicId(otp);
 				return yubicoId;
 			}
+			message.errorMsg("Invalid OTP");
+		} catch (YubicoVerificationException yve) {
+			return yubicoId;
+		} catch (YubicoValidationFailure yvf) {
+			return yubicoId;
+		}
 
 		return yubicoId;
 	}
