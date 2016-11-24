@@ -28,7 +28,6 @@ public class MediumSecurityDAOBean {
 					.setParameter("username", username)
 					.getSingleResult();
 		} catch (NoResultException nre) {
-			nre.printStackTrace();
 			return null;
 		}
 	}
