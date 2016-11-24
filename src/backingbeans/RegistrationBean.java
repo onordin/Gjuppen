@@ -53,6 +53,9 @@ public class RegistrationBean implements Serializable {
 
 	public String register(){
 		if(localRegistrationEJB.registerUser(username, password, otp)){
+			this.username = "";
+			this.password = "";
+			this.otp = "";
 			System.out.println("gick bra");
 			return "";
 		}
