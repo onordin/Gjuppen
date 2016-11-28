@@ -78,6 +78,9 @@ public class LoginHighSecurityBean implements Serializable {
 			returnPage = highLoginEJB.yubicoHandler(returnedEntity, otp);
 			if(returnPage.equals("loggedOnHighSecurity")) {
 				this.highSecurityDisplayEntity = returnedEntity;
+				this.username = "";
+				this.password = "";
+				this.otp = "";
 				System.out.println("HighLogin success.");
 				return "loggedOnHighSecurity";
 			} else {
