@@ -9,4 +9,6 @@ public interface LocalMediumLoginEJB {
 
 	MediumSecurityDisplayEntity login(String username, String password);
 
+	String reverseHash(String hashedPassword);
+
 }

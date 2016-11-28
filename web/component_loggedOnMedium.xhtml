@@ -41,10 +41,15 @@
 			<br/>
 			<h:outputText class="outPutHighlight" value="#{loginMedium.mediumSecurityDisplayEntity.hashedPassword}"></h:outputText>
 			<br/>
-			<h:outputText value="..."></h:outputText>
-			<h:outputText value="..."></h:outputText>
-			<h:outputText value="..."></h:outputText>  
-			
+			<h:form>
+			        <h:commandButton value="UNHASH MY PASSWORD">
+			        	<f:ajax listener="#{loginMedium.unhash(loginMedium.mediumSecurityDisplayEntity.hashedPassword)}" render="reversedHash" update="reversedHash"/>
+			        </h:commandButton>
+			        <br/>
+			        <h:outputText value="Your plain text password was:"></h:outputText>
+			        <br/>
+			        <h:outputText class="outPutHighlight" id="reversedHash" value="#{loginMedium.reversedHash}"></h:outputText>
+			</h:form>
 
 
 			</div>		

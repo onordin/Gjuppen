@@ -7,6 +7,7 @@ import displayEntities.MediumSecurityDisplayEntity;
 import ejb.interfaces.LocalMediumLoginEJB;
 import ejb.passwordencryption.MD5;
 import entities.MediumSecurityEntity;
+import helpers.MD5_API_Reader;
 
 import javax.ejb.EJB;
 
@@ -31,6 +32,19 @@ public class MediumSecurityLoginEJB implements LocalMediumLoginEJB {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String reverseHash(String hashedPassword) {
+		String returnValue = "";
+		System.out.println("inside EJB to reverse: " + hashedPassword);
+		try {
+			returnValue = MD5_API_Reader.getResult(hashedPassword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("returning: " + returnValue);
+		return returnValue;
 	}
 
 }

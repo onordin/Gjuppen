@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import displayEntities.MediumSecurityDisplayEntity;
 import ejb.interfaces.LocalMediumLoginEJB;
-import entities.MediumSecurityEntity;
 
 @Named(value="loginMedium")
-@RequestScoped
+@SessionScoped
 public class LoginMediumSecurityBean implements Serializable {
 
 	private static final long serialVersionUID = -7132410149160249386L;
@@ -19,6 +19,7 @@ public class LoginMediumSecurityBean implements Serializable {
 	private String username;
 	private String password;
 	private MediumSecurityDisplayEntity mediumSecurityDisplayEntity; 
+	private String reversedHash;
 
 	@EJB
 	private LocalMediumLoginEJB mediumLoginEJB;
@@ -48,14 +49,19 @@ public class LoginMediumSecurityBean implements Serializable {
 		this.mediumSecurityDisplayEntity = mediumSecurityDisplayEntity;
 	}
 
+	
+	public String getReversedHash() {
+		return reversedHash;
+	}
+
+	public void setReversedHash(String reversedHash) {
+		this.reversedHash = reversedHash;
+	}
+
 	public String login() {
 		MediumSecurityDisplayEntity returnedEntity = mediumLoginEJB.login(username, password);
-		
-		
-		
 		if(returnedEntity != null) {
 			this.mediumSecurityDisplayEntity = returnedEntity; 
-			System.out.println("all good medium logon");
 			return "loggedOnMediumSecurity";
 		}else {
 			return "";
@@ -63,5 +69,14 @@ public class LoginMediumSecurityBean implements Serializable {
 	}
 	
 	
+	public String unhash(String hashedPassword) {
+		System.out.println("hash still in bean: " + mediumSecurityDisplayEntity.getHashedPassword());
+		System.out.println("hashedPassword: " + hashedPassword);
+		String resultReversedHash = mediumLoginEJB.reverseHash(hashedPassword);
+		if(resultReversedHash != "") {
+			this.reversedHash = resultReversedHash; 
+		}
+		return "";
+	}
 	
 }
