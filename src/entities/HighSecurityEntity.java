@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(name="high", schema="gjuppen")
 @NamedQueries({
 	@NamedQuery(name="HighSecurityEntity.getUserByUsername", query="SELECT u FROM HighSecurityEntity u WHERE u.username = :username"),
-	@NamedQuery(name="HighSecurityEntity.getUserByYubicoId", query="SELECT u FROM HighSecurityEntity u WHERE u.yubico = :yubico")
+	@NamedQuery(name="HighSecurityEntity.getUserByYubicoId", query="SELECT u FROM HighSecurityEntity u WHERE u.yubico = :yubico"),
+	@NamedQuery(name="HighSecurityEntity.findAll", query="SELECT u FROM HighSecurityEntity u")
 })
 public class HighSecurityEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -1,9 +1,15 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import entities.LowSecurityEntity;
 
@@ -37,16 +43,21 @@ public class LowSecurityDAOBean {
 		}
 	}
 
-	public boolean deleteUser(String deleteme) {
+	public void deleteAllUsers() {
 		try {
-			LowSecurityEntity user = getUserByUsername(deleteme);
-			em.remove(user);
-			return true;
+			TypedQuery<LowSecurityEntity> query = (TypedQuery<LowSecurityEntity>) em.createNamedQuery("LowSecurityEntity.findAll");
+		
+			List<LowSecurityEntity> allUsers = query.getResultList();
+			for(LowSecurityEntity low : allUsers) {
+				em.remove(low);
+			}
 		} catch (NoResultException nre) {
-			//throw new DataNotFoundException("No such username ("+username+") in database.");
-			return false;
+			//nre.printStackTrace();
+			
 		}
 		
 	}
+	
+	
 
 }

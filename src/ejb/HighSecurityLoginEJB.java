@@ -12,6 +12,8 @@ public class HighSecurityLoginEJB implements LocalHighLoginEJB {
 	@EJB
 	private HighSecurityDAOBean highSecurityDAOBean;
 
-	
+
+
+
 }
 

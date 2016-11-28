@@ -12,8 +12,11 @@ import com.yubico.client.v2.YubicoClient;
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
 
+import dao.HighSecurityDAOBean;
 import dao.LowSecurityDAOBean;
+import dao.MediumSecurityDAOBean;
 import entities.LowSecurityEntity;
+import messageservice.MessageService;
 
 
 
@@ -32,12 +35,7 @@ public class LoginBean implements Serializable{
 	
 	private Integer clientId = 30770;
 	private String secretKey = "5I7U3b492h87TmEQoXe5qfInLiQ=";
-	
-	private String findme;
-	private String deleteme;
-	
-	@EJB
-	LowSecurityDAOBean lowSecurityDOABean;
+
 	
 	
 	public String getOtp() {
@@ -57,18 +55,6 @@ public class LoginBean implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getFindme(){
-		return findme;
-	}
-	public void setFindme(String findme) {
-		this.findme = findme;
-	}
-	public String getDeleteme() {
-		return deleteme;
-	}
-	public void setDeleteme(String deleteme) {
-		this.deleteme = deleteme;
 	}
 	
 	
@@ -94,72 +80,4 @@ public class LoginBean implements Serializable{
 		}
 		else return "";
 	}
-	
-	public String findThisUser() {
-		System.out.println("findme = " +findme);
-		System.out.println("find this user result: " +lowSecurityDOABean.getUserByUsername(findme));
-		return "";
-	}
-	
-	public String deleteThisUser() {
-		if(lowSecurityDOABean.deleteUser(deleteme)) {
-			System.out.println(deleteme+ " has been removed.");
-		} else {
-			System.out.println("Användaren hittades inte.");
-		}
-		return "";
-	}
-	
-	// tillfällig metod som kan tas bort när det är fullmåne
-	public String createRandomLowUser() {
-		String[] randomNames = {"Zoila",
-				"Lewis",
-				"Estefana",
-				"Ona",
-				"Natividad",
-				"Alma",
-				"Sacha",
-				"Mireya",
-				"Loma",
-				"Merle",
-				"Anneliese",
-				"Janetta",
-				"Jacob",
-				"Idalia",
-				"Kathryn",
-				"Cordell",
-				"Jen",
-				"Tobi",
-				"Roxann",
-				"Eugenio",
-				"Sophia",
-				"Laurena",
-				"Rima",
-				"Apolonia",
-				"Laurice",
-				"Gladys",
-				"Antionette",
-				"Thad",
-				"Marsha",
-				"Cherrie",
-				"Randi",
-				"Sunday",
-				"Bunny",
-				"Vivienne",
-				"Rosena"}; //35 st namn
-		
-		Random rand = new Random();
-		int locationInArray = rand.nextInt(35)+1;
-		String username = randomNames[locationInArray-1];
-
-		String password = "password";
-		LowSecurityEntity lowSecurityUser = new LowSecurityEntity();
-		lowSecurityUser.setUsername(username);
-		lowSecurityUser.setPassword(password);
-		lowSecurityDOABean.saveUser(lowSecurityUser);
-		System.out.println("Random user "+username+" created and added to database with password 'password'.");
-		return "";
-	}
-	
-	
 }

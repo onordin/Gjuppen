@@ -1,11 +1,15 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import entities.HighSecurityEntity;
+import entities.LowSecurityEntity;
 
 @Stateless
 public class HighSecurityDAOBean {
@@ -49,4 +53,18 @@ public class HighSecurityDAOBean {
 		}
 	}
 
+	public void deleteAllUsers() {
+		try {
+			TypedQuery<HighSecurityEntity> query = (TypedQuery<HighSecurityEntity>) em.createNamedQuery("HighSecurityEntity.findAll");
+		
+			List<HighSecurityEntity> allUsers = query.getResultList();
+			for(HighSecurityEntity low : allUsers) {
+				em.remove(low);
+			}
+		} catch (NoResultException nre) {
+			//nre.printStackTrace();
+			
+		}
+		
+	}
 }
