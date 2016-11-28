@@ -8,6 +8,7 @@ import dao.LowSecurityDAOBean;
 import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
+import messageservice.MessageService;
 
 @Stateless
 public class LowSecurityLoginEJB implements LocalLowLoginEJB{

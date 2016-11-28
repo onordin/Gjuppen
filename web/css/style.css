@@ -1,5 +1,7 @@
 
-
+body {
+    background-color: #b1b1b1;
+}
 
 /* Header  */
 .navbar-static-top {
@@ -20,18 +22,28 @@
 }
 
 
-#jumbotron:hover {
-
+#jumbotronHeader {
+	font-family: Verdana;
+	font-size: 7em;
 }
 
 
 
 /*  Login  */
 .loginBox {
-	height: 200px;
-	border: 1px solid blue;
+	height: 250px;
+	border: 1px solid #800040;
 	padding: 5px; 
 }
+
+
+.loginBox:hover {
+	height: 250px;
+	border: 3px solid #800040;
+	padding: 3px; 
+}
+
+
 
 
 #login1 {
@@ -48,6 +60,12 @@
 
 #login3 {
 	background-color: #a8ffac;
+}
+
+
+
+#registerBox {
+	background-color: #8cd8f4;
 }
 
 

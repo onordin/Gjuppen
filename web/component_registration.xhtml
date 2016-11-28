@@ -30,41 +30,51 @@
 	
 	<div class="container">
 		<div class="row">
+		
+		
+			<div class="col-sm-4"></div> <!-- offsetting next column -->
+			
 			<div class="col-sm-4">
-				<div class="loginBox">
+				<div id="registerBox" class="loginBox">
 
- 	   <h:form id="registration">
-    
-	    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
-	    
-	    	<h:outputLabel for="registrationName" value="Username:"></h:outputLabel>
-			<h:inputText id="registrationName" label="" value="#{registrationBean.username}">	 
-			</h:inputText>
-			<h:outputLabel for="registrationPassword" value="Password:"></h:outputLabel>
-			<h:inputText id="registrationPassword" label="" value="#{registrationBean.password}">	 
-			</h:inputText>
-			
-			<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
-			<h:inputText id="registrationOTP" label="" value="#{registrationBean.otp}">	 
-			</h:inputText>
-			</h:panelGrid>
-			
-	        <h:commandButton action="#{registrationBean.register()}" value="Register"></h:commandButton>
-	       	<br/><br />
-	       	<h:commandButton id="oscar" action="#{registrationBean.deleteAllUsers()}" value="DäLLiT ål jucärz"></h:commandButton>
-	       	<br />
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />	
-	    </h:form>
-	    
-	   
-	    
-	   
-
+		 		   <h:form id="registration">
+					    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+					    
+					    	<h:outputLabel for="registrationName" value="Username:"></h:outputLabel>
+							<h:inputText id="registrationName" label="" value="#{registrationBean.username}">	 
+							</h:inputText>
+							<h:outputLabel for="registrationPassword" value="Password:"></h:outputLabel>
+							<h:inputText id="registrationPassword" label="" value="#{registrationBean.password}">	 
+							</h:inputText>
+							
+							<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
+							<h:inputText id="registrationOTP" label="" value="#{registrationBean.otp}">	 
+							</h:inputText>
+							</h:panelGrid>
+							
+					        <h:commandButton action="#{registrationBean.register()}" value="Register"></h:commandButton>
+							<br/>
+					       		
+					</h:form>
+					
+					<p:messages for="registration" showDetail="true" autoUpdate="true" closable="true" />
+				</div>	<!-- end of registration -->
 				
-						
-					</div>	<!-- end of login1 -->
-			</div>	
-		</div>
+				
+				<h:form id="formToDeleteAllUsers">
+					<br/>
+					<h:commandButton id="oscar" action="#{registrationBean.deleteAllUsers()}" value="DäLLiT ål jucärz"></h:commandButton>
+					<br />
+				</h:form>
+									
+									
+			</div>	<!-- end of col -->
+			
+			
+			
+			
+			
+		</div>   <!-- end of row -->
 	</div>	<!-- end of container -->
 
 			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>

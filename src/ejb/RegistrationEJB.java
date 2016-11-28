@@ -79,7 +79,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
-				message.successMsg("Registration Successful");
+				message.successMsg("registration", "Registration Successful");
 				return true;
 				// }
 				// message.errorMsg("YubiKey already in use");
@@ -106,10 +106,10 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 
 				return true;
 			}
-			message.errorMsg("Username taken");
+			message.errorMsg("registration", "Username taken");
 			return false;
 		}
-		message.errorMsg("Username required");
+		message.errorMsg("registration", "Username required");
 		return false;
 	}
 
@@ -117,14 +117,14 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		if (!password.trim().equals("")) {
 			return true;
 		}
-		message.errorMsg("Password required");
+		message.errorMsg("registration", "Password required");
 		return false;
 	}
 
 	private boolean isOTPValid(String otp) {
 		boolean validOTP = YubicoClient.isValidOTPFormat(otp);
 		if (validOTP == false) {
-			message.errorMsg("Invalid OTP-format");
+			message.errorMsg("registration","Invalid OTP-format");
 		}
 		return validOTP;
 	}
@@ -138,7 +138,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				yubicoId = YubicoClient.getPublicId(otp);
 				return yubicoId;
 			}
-			message.errorMsg("Invalid OTP");
+			message.errorMsg("registration", "Invalid OTP");
 		} catch (YubicoVerificationException yve) {
 			yve.printStackTrace();
 			return yubicoId;
@@ -155,7 +155,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		lowSecurityDAOBean.deleteAllUsers();
 		mediumSecurityDAOBean.deleteAllUsers();
 		highSecurityDAOBean.deleteAllUsers();
-		message.successMsg("All users deleted");
+		message.successMsg("registration", "All users deleted");
 	}
 	
 }

@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import displayEntities.MediumSecurityDisplayEntity;
 import ejb.interfaces.LocalMediumLoginEJB;
+import messageservice.MessageService;
 
 @Named(value="loginMedium")
 @SessionScoped
@@ -19,10 +20,15 @@ public class LoginMediumSecurityBean implements Serializable {
 	private String password;
 	private MediumSecurityDisplayEntity mediumSecurityDisplayEntity; 
 	private String reversedHash;
+	private MessageService messageService;
 
 	@EJB
 	private LocalMediumLoginEJB mediumLoginEJB;
 
+	public LoginMediumSecurityBean() {
+		messageService = new MessageService();
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -68,6 +74,7 @@ public class LoginMediumSecurityBean implements Serializable {
 			System.out.println("Returning displayentitiy: " + this.mediumSecurityDisplayEntity.toString());
 			return "loggedOnMediumSecurity";
 		}else {
+			messageService.errorMsg("login2", "Wrong username and/or password");			
 			return "";
 		}
 	}

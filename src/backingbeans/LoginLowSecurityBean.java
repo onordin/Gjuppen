@@ -9,6 +9,7 @@ import javax.inject.Named;
 import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
+import messageservice.MessageService;
 
 @Named(value="loginLow")
 @RequestScoped
@@ -20,11 +21,15 @@ public class LoginLowSecurityBean implements Serializable {
 	private String password;
 	private LowSecurityDisplayEntity lowSecurityDisplayEntity;
 	private String firstCharPassword;
+	private MessageService messageService;
 
 	@EJB
 	private LocalLowLoginEJB lowLoginEJB;
 	
-	
+
+	public LoginLowSecurityBean() {
+		messageService = new MessageService();
+	}
 	
 	
 	public LowSecurityDisplayEntity getLowSecurityDisplayEntity() {
@@ -70,6 +75,7 @@ public class LoginLowSecurityBean implements Serializable {
 			firstCharPassword = returnedEntity.getPassword().substring(0, 1); 
 			return "loggedOnLowSecurity";
 		}else {
+			messageService.errorMsg("login1", "Wrong username and/or password");
 			return "";
 		}
 	}
