@@ -27,8 +27,10 @@ public class LoginHighSecurityBean implements Serializable {
 	private String username;
 	private String password;
 	private String otp;
-	private Integer clientId = 30770;
-	private String secretKey = "5I7U3b492h87TmEQoXe5qfInLiQ=";
+	
+	
+	
+	
 	private HighSecurityDisplayEntity highSecurityDisplayEntity;
 	
 	@EJB
@@ -57,51 +59,38 @@ public class LoginHighSecurityBean implements Serializable {
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
-	public HighSecurityDisplayEntity getHighSecurityDisPlayEntity() {
+	
+	
+
+	public HighSecurityDisplayEntity getHighSecurityDisplayEntity() {
 		return highSecurityDisplayEntity;
 	}
 
 	public void setHighSecurityDisplayEntity(HighSecurityDisplayEntity highSecurityDisplayEntity) {
 		this.highSecurityDisplayEntity = highSecurityDisplayEntity;
 	}
-	
 
-	public String login() throws YubicoVerificationException, YubicoValidationFailure, NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, YubicoVerificationException, YubicoValidationFailure {
 		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password); 
 		
+		String returnPage;
 		if (returnedEntity != null) {
-			YubicoClient client = YubicoClient.getClient(clientId, secretKey);
-			VerificationResponse response = client.verify(otp);
-			
-			if (response.isOk()) {
-				
-				//After validating the OTP you should make sure that the publicId part belongs to the correct user. For example:
-
-				if(YubicoClient.getPublicId(otp)
-					    .equals(returnedEntity.getYubicoId())) {
-					System.out.println("HighLogin Success!");
-					this.highSecurityDisplayEntity = returnedEntity;
-					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getUsername());
-					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getHashedPassword());
-					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getYubicoId());
-					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getSalt());
-					return "loggedOnHighSecurity";
-				} else {
-					System.out.println("This Yubico key doesn't belong to this user.");
-					return "";
-				}
-				
+			returnPage = highLoginEJB.yubicoHandler(returnedEntity, otp);
+			if(returnPage.equals("loggedOnHighSecurity")) {
+				this.highSecurityDisplayEntity = returnedEntity;
+				System.out.println("HighLogin success.");
+				return "loggedOnHighSecurity";
 			} else {
-				System.out.println("Response is not Ok.");
-				return "";
-				
+				System.out.println(returnPage);
+				return null;
 			}
 		} else {
 			System.out.println("returnedEntity is null");
 			return "";
 		}
-		
 	}
+
+	
 
 	
 

@@ -7,6 +7,11 @@ import java.security.spec.InvalidKeySpecException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import com.yubico.client.v2.VerificationResponse;
+import com.yubico.client.v2.YubicoClient;
+import com.yubico.client.v2.exceptions.YubicoValidationFailure;
+import com.yubico.client.v2.exceptions.YubicoVerificationException;
+
 import dao.HighSecurityDAOBean;
 import displayEntities.HighSecurityDisplayEntity;
 import displayEntities.MediumSecurityDisplayEntity;
@@ -19,6 +24,8 @@ import entities.MediumSecurityEntity;
 @Stateless
 public class HighSecurityLoginEJB implements LocalHighLoginEJB {
 	
+	private Integer clientId = 30770;
+	private String secretKey = "5I7U3b492h87TmEQoXe5qfInLiQ=";
 	
 	@EJB
 	private HighSecurityDAOBean highSecurityDAOBean;
@@ -38,6 +45,30 @@ public class HighSecurityLoginEJB implements LocalHighLoginEJB {
 			} 
 		}
 		return null;
+	}
+
+	@Override
+	public String yubicoHandler(HighSecurityDisplayEntity returnedEntity, String otp) throws YubicoVerificationException, YubicoValidationFailure {
+		
+			YubicoClient client = YubicoClient.getClient(clientId, secretKey);
+			VerificationResponse response = client.verify(otp);
+			
+			if (response.isOk()) {
+				
+				//After validating the OTP you should make sure that the publicId part belongs to the correct user. For example:
+
+				if(YubicoClient.getPublicId(otp)
+					    .equals(returnedEntity.getYubicoId())) {
+					return "loggedOnHighSecurity";
+				} else {
+					return "This Yubico key doesn't belong to this user.";
+				}
+				
+			} else {
+				return "Response is not Ok. Old one-time-password.";
+				
+			}
+		
 	}
 
 
