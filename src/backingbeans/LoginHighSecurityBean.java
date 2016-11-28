@@ -80,10 +80,11 @@ public class LoginHighSecurityBean implements Serializable {
 				if(YubicoClient.getPublicId(otp)
 					    .equals(returnedEntity.getYubicoId())) {
 					System.out.println("HighLogin Success!");
-					this.highSecurityDisplayEntity.setUsername(returnedEntity.getUsername());
-					this.highSecurityDisplayEntity.setHashedPassword(returnedEntity.getHashedPassword());
+					this.highSecurityDisplayEntity = returnedEntity;
 					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getUsername());
 					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getHashedPassword());
+					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getYubicoId());
+					System.out.println("kommer det ut något här? " + this.highSecurityDisplayEntity.getSalt());
 					return "loggedOnHighSecurity";
 				} else {
 					System.out.println("This Yubico key doesn't belong to this user.");
