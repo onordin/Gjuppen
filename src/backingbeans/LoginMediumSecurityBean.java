@@ -3,7 +3,6 @@ package backingbeans;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -59,9 +58,14 @@ public class LoginMediumSecurityBean implements Serializable {
 	}
 
 	public String login() {
+		mediumSecurityDisplayEntity = null;
+		reversedHash = "";
 		MediumSecurityDisplayEntity returnedEntity = mediumLoginEJB.login(username, password);
 		if(returnedEntity != null) {
 			this.mediumSecurityDisplayEntity = returnedEntity; 
+			this.username = "";
+			this.password = "";
+			System.out.println("Returning displayentitiy: " + this.mediumSecurityDisplayEntity.toString());
 			return "loggedOnMediumSecurity";
 		}else {
 			return "";
@@ -73,8 +77,11 @@ public class LoginMediumSecurityBean implements Serializable {
 		System.out.println("hash still in bean: " + mediumSecurityDisplayEntity.getHashedPassword());
 		System.out.println("hashedPassword: " + hashedPassword);
 		String resultReversedHash = mediumLoginEJB.reverseHash(hashedPassword);
-		if(resultReversedHash != "") {
-			this.reversedHash = resultReversedHash; 
+		if(resultReversedHash != null && resultReversedHash != "" && reversedHash.length() != 0) {		 
+			//vid failed de-cryption så verkar den returnera en sträng som inte är "" men length är 0 vilket åtminstone gör att den hamnar i "else" delen av metoden
+			this.reversedHash = resultReversedHash;
+		}else {
+			this.reversedHash = "Congratulations, your password was strong/unique enough to resist MD5 decryption (for now)";
 		}
 		return "";
 	}

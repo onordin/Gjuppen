@@ -65,6 +65,8 @@ public class LoginLowSecurityBean implements Serializable {
 		
 		if(returnedEntity != null) {
 			this.lowSecurityDisplayEntity = returnedEntity;
+			this.username = "";
+			this.password = "";
 			firstCharPassword = returnedEntity.getPassword().substring(0, 1); 
 			return "loggedOnLowSecurity";
 		}else {
