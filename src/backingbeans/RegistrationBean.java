@@ -17,6 +17,7 @@ public class RegistrationBean implements Serializable {
 	private String username;
 	private String password;
 	private String otp;
+	private String passwordStrength;
 	
 	@EJB
 	private LocalRegistrationEJB localRegistrationEJB;
@@ -61,6 +62,19 @@ public class RegistrationBean implements Serializable {
 		}
 		System.out.println("gick inte bra");
 		return "";
+	}
+	
+	public void checkPasswordStrength(){
+		passwordStrength = localRegistrationEJB.checkPasswordStrength(password);
+	}
+	
+	public String getPasswordStrength() {
+		return passwordStrength;
+	}
+
+
+	public void setPasswordStrength(String passwordStrength) {
+		this.passwordStrength = passwordStrength;
 	}
 
 }
