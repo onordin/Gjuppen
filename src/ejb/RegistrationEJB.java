@@ -3,6 +3,8 @@ package ejb;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -158,6 +160,65 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		message.successMsg("registration", "All users deleted");
 	}
 	
+	public String checkPasswordStrength(String password) {
+		String passwordStrength = "";
+		if(password.trim().equals("")||password == null){
+			return "Invalid password";
+		}
+		if(controlPassword(password) < 2 ) {
+			passwordStrength = "Very strong";
+		}
+		if(controlPassword(password) >= 3 ) {
+			passwordStrength = "Weak";
+		}
+		if(controlPassword(password) == 2) {
+			passwordStrength = "Strong";
+		}
+		return passwordStrength;
+		
+	}
+	
+	private int controlPassword(String password){
+		String upperCase = "[A-Z]";
+		String lowerCase = "[a-z]";
+		String digit = "[0-9]";
+		String specialChar = "[!@#$&*]";
+		int minimumLength = 8;
+		int counter = 0;
+		if(password.length() < minimumLength){
+			System.out.println("Mindre än 8");
+			counter +=2;
+		}
+		if(!isPasswordContaining(password, upperCase)){
+			System.out.println("Inget uppercase");
+			counter++;
+		}
+		if(!isPasswordContaining(password, lowerCase)){
+			System.out.println("Inget lowercase");
+			counter++;
+		}
+		if(!isPasswordContaining(password, digit)){
+			System.out.println("inga siffror");
+			counter++;
+		}
+		if(!isPasswordContaining(password, specialChar)){
+			System.out.println("inga special");
+			counter++;
+		}
+		
+		System.out.println(counter);
+		return counter;
+	}
+	
+	private boolean isPasswordContaining(String password, String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(password);
+		
+		if(!matcher.find()){
+			return false;
+		}
+		return true;
+	}
 }
 
 
