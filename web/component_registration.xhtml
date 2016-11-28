@@ -8,69 +8,93 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-	
-		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1" />	
-		
-		<title>Login security demo</title>
-		
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-	
-		
-		
-	</h:head>
+<h:head>
 
-	<h:body>
-	
+	<meta http-equiv="Content-Type"
+		content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Login security demo</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+
+
+</h:head>
+
+<h:body>
+
 	<div class="container">
+	
+		<br></br>
+		<hr></hr>
+	
+	
 		<div class="row">
+		
+		
+			<div class="col-sm-4"></div> <!-- offsetting next column -->
+			
 			<div class="col-sm-4">
-				<div class="loginBox">
+				<div id="registerBox" class="loginBox">
+				<h4>Register a new user</h4>
 
- 	   <h:form id="registration">
-    
-	    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
-	    
-	    	<h:outputLabel for="registrationName" value="Username:"></h:outputLabel>
-			<h:inputText id="registrationName" label="" value="#{registrationBean.username}">	 
-			</h:inputText>
-			<h:outputLabel for="registrationPassword" value="Password:"></h:outputLabel>
-			<h:inputText id="registrationPassword" label="" value="#{registrationBean.password}">	 
-			</h:inputText>
-			
-			<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
-			<h:inputText id="registrationOTP" label="" value="#{registrationBean.otp}">	 
-			</h:inputText>
-			</h:panelGrid>
-			
-	        <h:commandButton action="#{registrationBean.register()}" value="Register"></h:commandButton>
-	       	<br/><br />
-	       	<h:commandButton id="oscar" action="#{registrationBean.deleteAllUsers()}" value="DäLLiT ål jucärz"></h:commandButton>
-	       	<br />
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />	
-	    </h:form>
-	    
-	   
-	    
-	   
-
+		 		   <h:form id="registration">
+					    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+							<h:outputLabel for="registrationName" value="Username:"></h:outputLabel>
+							<h:inputText id="registrationName" label=""
+								value="#{registrationBean.username}">
+							</h:inputText>
+							<h:outputLabel for="registrationPassword" value="Password:"></h:outputLabel>
+							<h:inputSecret id="registrationPassword" label=""
+								value="#{registrationBean.password}">
+								<f:ajax event="keyup"
+									listener="#{registrationBean.checkPasswordStrength()}"
+									render="passwordStrength" />
+							</h:inputSecret>
+							<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
+							<h:inputText id="registrationOTP" label=""
+								value="#{registrationBean.otp}">
+							</h:inputText>
+							<h:outputLabel id="passwordStrenghtLabel" for="passwordStrength"
+								value="Password Strength: "></h:outputLabel>
+							<h:outputText id="passwordStrength"
+								value="#{registrationBean.passwordStrength}"></h:outputText>
+							<f:facet name="footer">
+								<h:panelGroup style="display:block; text-align:center">
+									<h:commandButton action="#{registrationBean.register()}"
+										value="Register"></h:commandButton>
+								</h:panelGroup>
+							</f:facet>
+						</h:panelGrid>
+					</h:form>
+					
+					<p:messages for="registration" showDetail="true" autoUpdate="true" closable="true" />
+				</div>	<!-- end of registration -->
 				
-						
-					</div>	<!-- end of login1 -->
-			</div>	
-		</div>
+				
+				<h:form id="formToDeleteAllUsers">
+					<br/>
+					<h:commandButton id="oscar" action="#{registrationBean.deleteAllUsers()}" value="DäLLiT ål jucärz"></h:commandButton>
+					<br />
+				</h:form>
+									
+									
+			</div>	<!-- end of col -->
+		</div>   <!-- end of row -->
 	</div>	<!-- end of container -->
 
-			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
-			<script src="js/jquery-3.1.0.min.js" />
-			<script src="js/bootstrap.min.js" />
+	<script type='text/javascript'
+		src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
+	<script src="js/jquery-3.1.0.min.js" />
+	<script src="js/bootstrap.min.js" />
 
-   	</h:body>
+</h:body>
 
 </html>

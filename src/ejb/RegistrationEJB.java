@@ -3,6 +3,8 @@ package ejb;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -79,7 +81,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
-				message.successMsg("Registration Successful");
+				message.successMsg("registration", "Registration Successful");
 				return true;
 				// }
 				// message.errorMsg("YubiKey already in use");
@@ -106,10 +108,10 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 
 				return true;
 			}
-			message.errorMsg("Username taken");
+			message.errorMsg("registration", "Username taken");
 			return false;
 		}
-		message.errorMsg("Username required");
+		message.errorMsg("registration", "Username required");
 		return false;
 	}
 
@@ -117,14 +119,14 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		if (!password.trim().equals("")) {
 			return true;
 		}
-		message.errorMsg("Password required");
+		message.errorMsg("registration", "Password required");
 		return false;
 	}
 
 	private boolean isOTPValid(String otp) {
 		boolean validOTP = YubicoClient.isValidOTPFormat(otp);
 		if (validOTP == false) {
-			message.errorMsg("Invalid OTP-format");
+			message.errorMsg("registration","Invalid OTP-format");
 		}
 		return validOTP;
 	}
@@ -138,7 +140,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				yubicoId = YubicoClient.getPublicId(otp);
 				return yubicoId;
 			}
-			message.errorMsg("Invalid OTP");
+			message.errorMsg("registration", "Invalid OTP");
 		} catch (YubicoVerificationException yve) {
 			yve.printStackTrace();
 			return yubicoId;
@@ -155,9 +157,68 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		lowSecurityDAOBean.deleteAllUsers();
 		mediumSecurityDAOBean.deleteAllUsers();
 		highSecurityDAOBean.deleteAllUsers();
-		message.successMsg("All users deleted");
+		message.successMsg("registration", "All users deleted");
 	}
 	
+	public String checkPasswordStrength(String password) {
+		String passwordStrength = "";
+		if(password.trim().equals("")||password == null){
+			return "Invalid password";
+		}
+		if(controlPassword(password) < 2 ) {
+			passwordStrength = "Very strong";
+		}
+		if(controlPassword(password) >= 3 ) {
+			passwordStrength = "Weak";
+		}
+		if(controlPassword(password) == 2) {
+			passwordStrength = "Strong";
+		}
+		return passwordStrength;
+		
+	}
+	
+	private int controlPassword(String password){
+		String upperCase = "[A-Z]";
+		String lowerCase = "[a-z]";
+		String digit = "[0-9]";
+		String specialChar = "[!@#$&*]";
+		int minimumLength = 8;
+		int counter = 0;
+		if(password.length() < minimumLength){
+			System.out.println("Mindre än 8");
+			counter +=2;
+		}
+		if(!isPasswordContaining(password, upperCase)){
+			System.out.println("Inget uppercase");
+			counter++;
+		}
+		if(!isPasswordContaining(password, lowerCase)){
+			System.out.println("Inget lowercase");
+			counter++;
+		}
+		if(!isPasswordContaining(password, digit)){
+			System.out.println("inga siffror");
+			counter++;
+		}
+		if(!isPasswordContaining(password, specialChar)){
+			System.out.println("inga special");
+			counter++;
+		}
+		
+		System.out.println(counter);
+		return counter;
+	}
+	
+	private boolean isPasswordContaining(String password, String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(password);
+		
+		if(!matcher.find()){
+			return false;
+		}
+		return true;
+	}
 }
 
 
