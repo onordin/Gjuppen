@@ -84,12 +84,13 @@ public class LoginMediumSecurityBean implements Serializable {
 		System.out.println("hash still in bean: " + mediumSecurityDisplayEntity.getHashedPassword());
 		System.out.println("hashedPassword: " + hashedPassword);
 		String resultReversedHash = mediumLoginEJB.reverseHash(hashedPassword);
-		if(resultReversedHash != null && resultReversedHash != "" && reversedHash.length() != 0) {		 
+		if(resultReversedHash != null && resultReversedHash != "" && resultReversedHash.length() != 0) {		 
 			//vid failed de-cryption så verkar den returnera en sträng som inte är "" men length är 0 vilket åtminstone gör att den hamnar i "else" delen av metoden
 			this.reversedHash = resultReversedHash;
 		}else {
 			this.reversedHash = "Congratulations, your password was strong/unique enough to resist MD5 decryption (for now)";
 		}
+		System.out.println("this.reversedHash: " + this.reversedHash);
 		return "";
 	}
 	
