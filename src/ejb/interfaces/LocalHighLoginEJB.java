@@ -14,9 +14,9 @@ import displayEntities.HighSecurityDisplayEntity;
 @Local
 public interface LocalHighLoginEJB {
 
-	HighSecurityDisplayEntity login(String username, String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException;
-
 	String yubicoHandler(HighSecurityDisplayEntity returnedEntity, String otp) throws YubicoVerificationException, YubicoValidationFailure;
+
+	HighSecurityDisplayEntity login(String username, String password) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException;
 
 
 }

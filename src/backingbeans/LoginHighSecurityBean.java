@@ -6,17 +6,15 @@ import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import com.yubico.client.v2.VerificationResponse;
-import com.yubico.client.v2.YubicoClient;
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
 
 import displayEntities.HighSecurityDisplayEntity;
 import ejb.interfaces.LocalHighLoginEJB;
+import messageservice.MessageService;
 
 @Named(value="loginHigh")
 @SessionScoped
@@ -27,15 +25,17 @@ public class LoginHighSecurityBean implements Serializable {
 	private String username;
 	private String password;
 	private String otp;
-	
-	
-	
-	
+	private MessageService messageService;
 	private HighSecurityDisplayEntity highSecurityDisplayEntity;
 	
 	@EJB
 	private LocalHighLoginEJB highLoginEJB;
 
+	
+	public LoginHighSecurityBean() {
+		messageService = new MessageService();
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -72,23 +72,22 @@ public class LoginHighSecurityBean implements Serializable {
 
 	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, YubicoVerificationException, YubicoValidationFailure {
 		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password); 
-		
-		String returnPage;
+
+		String returnCode;
 		if (returnedEntity != null) {
-			returnPage = highLoginEJB.yubicoHandler(returnedEntity, otp);
-			if(returnPage.equals("loggedOnHighSecurity")) {
+			returnCode = highLoginEJB.yubicoHandler(returnedEntity, otp);
+			if(returnCode.equals("loggedOnHighSecurity")) {
 				this.highSecurityDisplayEntity = returnedEntity;
 				this.username = "";
 				this.password = "";
 				this.otp = "";
-				System.out.println("HighLogin success.");
 				return "loggedOnHighSecurity";
 			} else {
-				System.out.println(returnPage);
+				messageService.errorMsg("login3", returnCode);
 				return null;
 			}
 		} else {
-			System.out.println("returnedEntity is null");
+			messageService.errorMsg("login3", "Wrong username and/or password");
 			return "";
 		}
 	}
