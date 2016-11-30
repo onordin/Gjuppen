@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+	
+		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1" />	
+		
+		<title>Login security demo</title>
+		
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+	
+		
+		
+	</h:head>
+
+	<h:body>
+	
+	<div class="container">
+		<div class="row">
+
+
+	
+			<div class="col-sm-4">
+				<div id="login1" class="loginBox">
+				<h4>Login Low Security</h4>
+			 	   <h:form>
+		    
+				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
+			    
+			    	<h:outputLabel for="login1Username" value="Username:"></h:outputLabel>
+					<h:inputText id="login1Username" label="" value="#{loginLow.username}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					<h:outputLabel for="login1Password" value="Password:"></h:outputLabel>
+					<h:inputText id="login1Password" label="" value="#{loginLow.password}" required="true"
+							requiredMessage="This field is required">	 
+					</h:inputText>
+					
+					 <h:commandButton action="#{loginLow.login()}" value="Login"></h:commandButton>
+			     	<br/>
+			     	
+			    	 </h:panelGrid>
+			    </h:form>
+			    
+		     	<p:messages for="login1" showDetail="true" autoUpdate="true" closable="true" />
+			    
+				</div>	<!-- end of loginBox -->
+			</div> <!-- end of col -->
+			
+			
+			<div class="col-sm-4">
+				<a href="../secure/startpage.xhtml">
+				<div id="login2" class="loginBox">
+					<h4>Login Medium Security</h4>
+			 	</div>	<!-- end of loginBox -->
+			 	</a>
+			</div>		<!-- end of col --> 
+		
+		
+		
+			<div class="col-sm-4">
+				<a href="../secure/startpage.xhtml">
+				<div id="login3" class="loginBox">
+					<h4>Login High Security</h4>
+			 	</div>	<!-- end of loginBox -->
+			 	</a>
+			</div>	<!-- end of col -->	
+			
+			
+			
+		</div>	<!--  end of row -->
+	
+	</div>	<!-- end of container -->
+
+
+
+
+
+			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
+			<script src="../js/jquery-3.1.0.min.js" />
+			<script src="../js/bootstrap.min.js" />
+
+   	</h:body>
+
+</html>
+	    
