@@ -94,9 +94,9 @@
 					</h:inputSecret>
 					
 					<h:outputLabel for="loginOTP" value="Yubico key:"></h:outputLabel>
-					<h:inputText id="loginOTP" label="" value="#{loginHigh.otp}" required="true"
+					<h:inputSecret id="loginOTP" label="" value="#{loginHigh.otp}" required="true"
 							requiredMessage="This field is required">	 
-					</h:inputText>
+					</h:inputSecret>
 					
 			        <h:commandButton action="#{loginHigh.login()}" value="Login"></h:commandButton>
 			     	<br/>			     
