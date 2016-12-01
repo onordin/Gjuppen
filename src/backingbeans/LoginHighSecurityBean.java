@@ -93,7 +93,11 @@ public class LoginHighSecurityBean implements Serializable {
 	}
 
 	
-
+	
+	public String logout() {
+		this.highSecurityDisplayEntity = null;
+		return "startpage";
+	}
 	
 
 	
