@@ -34,7 +34,15 @@
 		<div class="row">
 			<div class="col-sm-12">
 			
-			<h:outputText value="HIGH"></h:outputText>
+			<div class="pull-right">
+				<h:form>
+					<h:panelGrid columns="1" columnClasses="rightAlign">
+			        <h:commandButton action="#{loginHigh.logout()}" value="LOGOUT">
+			        </h:commandButton>
+			        </h:panelGrid>
+				</h:form>
+			</div>
+			
 			<h:outputText value="We have returned this username from our database:"></h:outputText>
 			<br/>
 			<h:outputText class="outPutHighlight" value="#{loginHigh.highSecurityDisplayEntity.username}"></h:outputText>

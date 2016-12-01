@@ -98,4 +98,10 @@ public class LoginMediumSecurityBean implements Serializable {
 		return "";
 	}
 	
+	
+	public String logout() {
+		this.reversedHash = "";
+		this.mediumSecurityDisplayEntity = null;
+		return "startpage";
+	}
 }

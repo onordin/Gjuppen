@@ -33,6 +33,14 @@
 		<div class="row">
 			<div class="col-sm-12">
 			
+			<div class="pull-right">
+				<h:form>
+					<h:panelGrid columns="1" columnClasses="rightAlign">
+			        <h:commandButton action="#{loginMedium.logout()}" value="LOGOUT">
+			        </h:commandButton>
+			        </h:panelGrid>
+				</h:form>
+			</div>
 			
 			<h:outputText value="We have returned this username from our database:"></h:outputText>
 			<br/>

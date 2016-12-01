@@ -4,6 +4,12 @@ body {
     word-break: break-all;
 }
 
+
+
+
+
+
+
 /* Header  */
 .navbar-static-top {
   margin-bottom: 0px;
@@ -27,6 +33,11 @@ body {
 	font-family: Verdana;
 	font-size: 7em;
 }
+
+
+
+
+
 
 
 
@@ -69,4 +80,9 @@ body {
 	background-color: #8cd8f4;
 }
 
+
+
+
+
+/*  Logged On   */
 
