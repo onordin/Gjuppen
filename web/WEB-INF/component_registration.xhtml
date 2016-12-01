@@ -59,9 +59,9 @@
 									render="passwordStrength" />
 							</h:inputSecret>
 							<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
-							<h:inputText id="registrationOTP" label=""
+							<h:inputSecret id="registrationOTP" label=""
 								value="#{registrationBean.otp}">
-							</h:inputText>
+							</h:inputSecret>
 							<h:outputLabel id="passwordStrenghtLabel" for="passwordStrength"
 								value="Password Strength: "></h:outputLabel>
 							<h:outputText id="passwordStrength"
