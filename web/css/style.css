@@ -1,6 +1,7 @@
 
 body {
     background-color: #b1b1b1;
+    word-break: break-all;
 }
 
 /* Header  */
