@@ -20,7 +20,6 @@ public class LoginLowSecurityBean implements Serializable {
 	private String username;
 	private String password;
 	private LowSecurityDisplayEntity lowSecurityDisplayEntity;
-	private String firstCharPassword;
 	private MessageService messageService;
 
 	@EJB
@@ -38,14 +37,6 @@ public class LoginLowSecurityBean implements Serializable {
 
 	public void setLowSecurityDisplayEntity(LowSecurityDisplayEntity lowSecurityDisplayEntity) {
 		this.lowSecurityDisplayEntity = lowSecurityDisplayEntity;
-	}
-
-	public String getFirstCharPassword() {
-		return firstCharPassword;
-	}
-
-	public void setFirstCharPassword(String firstCharPassword) {
-		this.firstCharPassword = firstCharPassword;
 	}
 
 	public String getUsername() {
@@ -72,7 +63,6 @@ public class LoginLowSecurityBean implements Serializable {
 			this.lowSecurityDisplayEntity = returnedEntity;
 			this.username = "";
 			this.password = "";
-			firstCharPassword = returnedEntity.getPassword().substring(0, 1); 
 			return "loggedOnLowSecurity";
 		}else {
 			messageService.errorMsg("login1", "Wrong username and/or password");

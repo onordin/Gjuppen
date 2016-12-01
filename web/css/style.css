@@ -18,7 +18,7 @@ body {
 
 .outPutHighlight {
 	font-size: 2em;
-	color: red;
+	color: #cb349d;
 }
 
 
@@ -62,7 +62,10 @@ body {
 	background-color: #a8ffac;
 }
 
+
+
 #registerBox {
 	background-color: #8cd8f4;
 }
+
 

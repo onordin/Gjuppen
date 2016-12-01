@@ -14,16 +14,21 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     	<meta name="viewport" content="width=device-width, initial-scale=1" />	
 		
-		<title>Login security demo</title>
-		
+	
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="../css/style.css" />
+
+		<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
+		<script src="../js/jquery-3.1.0.min.js" />
+		<script src="../js/bootstrap.min.js" />
+
+
+		<script src="../js/low.js" />
+		
 	
-		
-		
 	</h:head>
 
 	<h:body>
@@ -37,16 +42,30 @@
 			<br/>
 			<h:outputText class="outPutHighlight" value="#{loginLow.lowSecurityDisplayEntity.username}"></h:outputText>
 			<br/>
-			<h:outputText value="Your password starts with the following letter:"></h:outputText>
+			<button id="showLowPassword">Show my password!</button>
 			<br/>
-			<h:outputText class="outPutHighlight" value="#{loginLow.firstCharPassword}"></h:outputText>
+			<div id="lowPassword">
+				<h:outputText value="Your password is:"></h:outputText>
+				<h:outputText class="outPutHighlight" value="#{loginLow.lowSecurityDisplayEntity.password}"></h:outputText>
+			</div>
 			<br/>
-			<h:outputText value="We sent it to and from our server without encrypting it..."></h:outputText>
-			<h:outputText value="Also the password is stored in plain text in our database"></h:outputText>
-			<h:outputText value="...very lazy and sneaky :p "></h:outputText>  
-			
+			<div >
+				<h:outputText id="passwordInfo1" class="outPutHighlight" value="We sent it to and from our server without encrypting it..."></h:outputText>
+				<br/>
+				<h:outputText id="passwordInfo2" class="outPutHighlight" value="Also the password is stored in plain text in our database"></h:outputText>
+				<br/>
+				<h:outputText id="passwordInfo3" class="outPutHighlight" value="...very lazy and sneaky :) "></h:outputText>  
+			</div>
+
+		<script>
+			document.getElementById('lowPassword').style.display="none";
+			document.getElementById('passwordInfo1').style.display="none";
+			document.getElementById('passwordInfo2').style.display="none";
+			document.getElementById('passwordInfo3').style.display="none";
+		</script>
 
 
+ 			
 			</div>		
 		</div>	<!--  end of row -->
 	</div>	<!-- end of container -->
@@ -54,9 +73,7 @@
 
 
 
-			<script type='text/javascript' src="https://cdn.rawgit.com/jamesallardice/Placeholders.js/master/dist/placeholders.min.js"></script>
-			<script src="../js/jquery-3.1.0.min.js" />
-			<script src="../js/bootstrap.min.js" />
+
 
    	</h:body>
 
