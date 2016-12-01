@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import displayEntities.LowSecurityDisplayEntity;
@@ -11,8 +12,12 @@ import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
 import messageservice.MessageService;
 
+/**
+ * Presentation layer for the low-login function.
+ */
+
 @Named(value="loginLow")
-@RequestScoped
+@SessionScoped
 public class LoginLowSecurityBean implements Serializable {
 
 	private static final long serialVersionUID = -7409229278212770001L;

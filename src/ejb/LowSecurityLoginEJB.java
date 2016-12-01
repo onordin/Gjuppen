@@ -10,6 +10,10 @@ import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
 import messageservice.MessageService;
 
+/**
+ * Business logic for low security login.
+ */
+
 @Stateless
 public class LowSecurityLoginEJB implements LocalLowLoginEJB{
 	

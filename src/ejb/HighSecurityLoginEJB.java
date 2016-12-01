@@ -21,6 +21,10 @@ import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
 import entities.MediumSecurityEntity;
 
+/**
+ * Business logic for high security login.
+ */
+
 @Stateless
 public class HighSecurityLoginEJB implements LocalHighLoginEJB {
 	

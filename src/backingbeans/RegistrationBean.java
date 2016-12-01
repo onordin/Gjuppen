@@ -11,6 +11,10 @@ import ejb.interfaces.LocalLowLoginEJB;
 import ejb.interfaces.LocalMediumLoginEJB;
 import ejb.interfaces.LocalRegistrationEJB;
 
+/**
+ * Presentation layer the registration function.
+ */
+
 @Named(value="registrationBean")
 @RequestScoped
 public class RegistrationBean implements Serializable {

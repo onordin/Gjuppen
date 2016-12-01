@@ -16,6 +16,10 @@ import displayEntities.HighSecurityDisplayEntity;
 import ejb.interfaces.LocalHighLoginEJB;
 import messageservice.MessageService;
 
+/**
+ * Presentation layer for the high-login function.
+ */
+
 @Named(value="loginHigh")
 @SessionScoped
 public class LoginHighSecurityBean implements Serializable {

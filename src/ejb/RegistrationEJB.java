@@ -25,6 +25,10 @@ import entities.LowSecurityEntity;
 import entities.MediumSecurityEntity;
 import messageservice.MessageService;
 
+/**
+ * Business logic for registration.
+ */
+
 @Stateless
 public class RegistrationEJB implements LocalRegistrationEJB {
 
@@ -75,16 +79,16 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			String yubicoId = getYubicoIdFromOTP(otp);
 
 			if (yubicoId != null) {
-				// if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null)
-				// {
+				 if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null)
+				 {
 				high.setYubico(yubicoId);
 				highSecurityDAOBean.saveUser(high);
 				lowSecurityDAOBean.saveUser(low);
 				mediumSecurityDAOBean.saveUser(medium);
 				message.successMsg("registration", "Registration Successful");
 				return true;
-				// }
-				// message.errorMsg("YubiKey already in use");
+				 }
+				 message.errorMsg("registration", "YubiKey already in use");
 			}
 
 		}

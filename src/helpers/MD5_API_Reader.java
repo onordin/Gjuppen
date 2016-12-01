@@ -5,9 +5,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 public class MD5_API_Reader {
 	
-	
+	/**
+	 * Method that takes a MD5 hashed password and converts it to a string with help from md5decrypt-API.
+	 * 
+	 * @param hash = input MD5 hased password without salt.
+	 * @return string value
+	 */
 	public static String getResult(String hash) throws Exception {
 		
 		String start = "http://md5decrypt.net/Api/api.php?hash=";
