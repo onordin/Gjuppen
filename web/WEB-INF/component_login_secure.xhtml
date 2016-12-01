@@ -56,9 +56,9 @@
 					</h:inputText>
 					
 					<h:outputLabel for="login2Password" value="Password:"></h:outputLabel>
-					<h:inputText id="login2Password" label="" value="#{loginMedium.password}" required="true"
+					<h:inputSecret id="login2Password" label="" value="#{loginMedium.password}" required="true"
 							requiredMessage="This field is required">	 
-					</h:inputText>
+					</h:inputSecret>
 	
 	
 			        <h:commandButton action="#{loginMedium.login()}" value="Login"></h:commandButton>
@@ -89,9 +89,9 @@
 					</h:inputText>
 					
 					<h:outputLabel for="login3Password" value="Password:"></h:outputLabel>
-					<h:inputText id="login3Password" label="" value="#{loginHigh.password}" required="true"
+					<h:inputSecret id="login3Password" label="" value="#{loginHigh.password}" required="true"
 							requiredMessage="This field is required">	 
-					</h:inputText>
+					</h:inputSecret>
 					
 					<h:outputLabel for="loginOTP" value="Yubico key:"></h:outputLabel>
 					<h:inputText id="loginOTP" label="" value="#{loginHigh.otp}" required="true"
