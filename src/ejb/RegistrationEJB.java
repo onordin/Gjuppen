@@ -190,27 +190,21 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		int minimumLength = 8;
 		int counter = 0;
 		if(password.length() < minimumLength){
-			System.out.println("Mindre än 8");
 			counter +=2;
 		}
 		if(!isPasswordContaining(password, upperCase)){
-			System.out.println("Inget uppercase");
 			counter++;
 		}
 		if(!isPasswordContaining(password, lowerCase)){
-			System.out.println("Inget lowercase");
 			counter++;
 		}
 		if(!isPasswordContaining(password, digit)){
-			System.out.println("inga siffror");
 			counter++;
 		}
 		if(!isPasswordContaining(password, specialChar)){
-			System.out.println("inga special");
 			counter++;
 		}
 		
-		System.out.println(counter);
 		return counter;
 	}
 	

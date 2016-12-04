@@ -76,17 +76,14 @@ public class RegistrationBean implements Serializable {
 		localRegistrationEJB.deleteAllUsers();
 		return "";
 	}
-	public void checkPasswordStrength(){
-		passwordStrength = localRegistrationEJB.checkPasswordStrength(password);
-	}
 	
 	public String getPasswordStrength() {
 		return passwordStrength;
 	}
 
 
-	public void setPasswordStrength(String passwordStrength) {
-		this.passwordStrength = passwordStrength;
+	public void setPasswordStrength() {
+		this.passwordStrength = localRegistrationEJB.checkPasswordStrength(password);
 	}
 
 }
