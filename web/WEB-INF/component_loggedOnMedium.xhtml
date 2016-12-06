@@ -37,6 +37,7 @@
 				<h:form>
 					<h:panelGrid columns="1" columnClasses="rightAlign">
 			        <h:commandButton action="#{loginMedium.logout()}" value="LOGOUT">
+			        	<f:actionListener binding="#{encryptionBean.resetBean()}" />
 			        </h:commandButton>
 			        </h:panelGrid>
 				</h:form>

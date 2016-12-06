@@ -29,13 +29,24 @@ body {
 }
 
 
+.jumbotron {
+	height: 150px;
+}
+
 #jumbotronHeader {
 	font-family: Verdana;
-	font-size: 7em;
+	font-size: 5em;
+	margin: auto;
 }
 
 
+#encryptedDiv {
+	height: 200px;
+}
 
+#decryptedDiv {
+	height: 200px;
+}
 
 
 
