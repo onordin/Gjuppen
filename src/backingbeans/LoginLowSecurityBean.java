@@ -62,6 +62,10 @@ public class LoginLowSecurityBean implements Serializable {
 	
 	
 	public String login() {
+		if(username.trim().isEmpty() || password.trim().isEmpty()) {
+			messageService.errorMsg("login1", "Username and password required");
+			return "";
+		}
 		LowSecurityDisplayEntity returnedEntity = lowLoginEJB.login(username, password);
 		if(returnedEntity != null) {
 			this.lowSecurityDisplayEntity = returnedEntity;

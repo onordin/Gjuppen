@@ -75,6 +75,10 @@ public class LoginHighSecurityBean implements Serializable {
 	}
 
 	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, YubicoVerificationException, YubicoValidationFailure {
+		if(username.trim().isEmpty() || password.trim().isEmpty() || otp.trim().isEmpty()) {
+			messageService.errorMsg("login3", "Username, password & OTP required");
+			return "";
+		}
 		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password); 
 
 		String returnCode;

@@ -75,21 +75,26 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 				e.printStackTrace();
 				return false;
 			}
-
-			String yubicoId = getYubicoIdFromOTP(otp);
-
-			if (yubicoId != null) {
-				if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null) {
-					high.setYubico(yubicoId);
-					highSecurityDAOBean.saveUser(high);
-					lowSecurityDAOBean.saveUser(low);
-					mediumSecurityDAOBean.saveUser(medium);
-					message.successMsg("registration", "Registration Successful");
-					return true;
-				}
-				message.errorMsg("registration", "YubiKey already in use");
+			if(isYubikeyUnique(otp, high, medium, low)){
+				return true;
 			}
+		}
+		return false;
+	}
+	
+	private boolean isYubikeyUnique(String otp, HighSecurityEntity high, MediumSecurityEntity medium, LowSecurityEntity low){
+		String yubicoId = getYubicoIdFromOTP(otp);
 
+		if (yubicoId != null) {
+			if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null) {
+				high.setYubico(yubicoId);
+				highSecurityDAOBean.saveUser(high);
+				lowSecurityDAOBean.saveUser(low);
+				mediumSecurityDAOBean.saveUser(medium);
+				message.successMsg("registration", "Registration Successful");
+				return true;
+			}
+			message.errorMsg("registration", "YubiKey already in use");
 		}
 		return false;
 	}
@@ -146,10 +151,8 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			message.errorMsg("registration", "Invalid OTP");
 		} catch (YubicoVerificationException yve) {
 			yve.printStackTrace();
-			return yubicoId;
 		} catch (YubicoValidationFailure yvf) {
 			yvf.printStackTrace();
-			return yubicoId;
 		}
 
 		return yubicoId;
