@@ -6,9 +6,6 @@ import java.security.spec.InvalidKeySpecException;
 
 import javax.ejb.Local;
 
-import com.yubico.client.v2.exceptions.YubicoValidationFailure;
-import com.yubico.client.v2.exceptions.YubicoVerificationException;
-
 import displayEntities.HighSecurityDisplayEntity;
 
 @Local

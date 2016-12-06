@@ -2,16 +2,10 @@ package backingbeans;
 
 import java.io.Serializable;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import org.glassfish.jersey.internal.util.collection.StringIgnoreCaseKeyComparator;
-
-import displayEntities.MediumSecurityDisplayEntity;
-import ejb.interfaces.LocalMediumLoginEJB;
 import helpers.LiveEncryption;
-import messageservice.MessageService;
 
 @Named(value="encryptionBean")
 @SessionScoped

@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import javax.crypto.Cipher;
 
-import org.primefaces.expression.impl.ThisExpressionResolver;
 
 public class LiveEncryption {
 
@@ -91,38 +90,6 @@ public class LiveEncryption {
 		decrypted = decrypt(bytes, privateKey);
 		return decrypted;
 	}
-	
-	
-	
-	
-	/**
-	
-	public void main(String[] args) {
-
-		try {
-
-			generateKey();
-
-			final String originalText = "Text to be encrypted bla bla bla bla bla bla bla bla bla bla bla bla bla";
-
-			final byte[] cipherText = encrypt(originalText, this.publicKey);
-
-			final String plainText = decrypt(cipherText, privateKey);
-
-			System.out.println("Original: " + originalText);
-			System.out.println("Public key: " + Integer.toString(publicKey.hashCode()));
-			System.out.println("Private Key: " + Integer.toString(privateKey.hashCode()));
-
-			String encryptedString = Arrays.toString(cipherText);
-			System.out.println("Arrays to String: " + encryptedString);
-
-			System.out.println("Decrypted: " + plainText);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	
 	
 }

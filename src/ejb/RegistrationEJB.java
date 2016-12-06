@@ -158,14 +158,6 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		return yubicoId;
 	}
 
-	@Override
-	public void deleteAllUsers() {
-		lowSecurityDAOBean.deleteAllUsers();
-		mediumSecurityDAOBean.deleteAllUsers();
-		highSecurityDAOBean.deleteAllUsers();
-		message.successMsg("registration", "All users deleted");
-	}
-
 	public String checkPasswordStrength(String password) {
 		String passwordStrength = "";
 		if (password.trim().isEmpty() || password == null) {

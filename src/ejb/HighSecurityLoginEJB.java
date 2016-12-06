@@ -6,7 +6,6 @@ import java.security.spec.InvalidKeySpecException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import com.yubico.client.v2.VerificationResponse;
 import com.yubico.client.v2.YubicoClient;
@@ -15,12 +14,9 @@ import com.yubico.client.v2.exceptions.YubicoVerificationException;
 
 import dao.HighSecurityDAOBean;
 import displayEntities.HighSecurityDisplayEntity;
-import displayEntities.MediumSecurityDisplayEntity;
 import ejb.interfaces.LocalHighLoginEJB;
-import ejb.passwordencryption.MD5;
 import ejb.passwordencryption.PBKDF2;
 import entities.HighSecurityEntity;
-import entities.MediumSecurityEntity;
 
 /**
  * Business logic for high security login.
