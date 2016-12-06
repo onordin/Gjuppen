@@ -63,7 +63,6 @@ public class LoginLowSecurityBean implements Serializable {
 	
 	public String login() {
 		LowSecurityDisplayEntity returnedEntity = lowLoginEJB.login(username, password);
-		
 		if(returnedEntity != null) {
 			this.lowSecurityDisplayEntity = returnedEntity;
 			this.username = "";

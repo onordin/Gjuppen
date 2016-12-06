@@ -79,16 +79,15 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			String yubicoId = getYubicoIdFromOTP(otp);
 
 			if (yubicoId != null) {
-				 if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null)
-				 {
-				high.setYubico(yubicoId);
-				highSecurityDAOBean.saveUser(high);
-				lowSecurityDAOBean.saveUser(low);
-				mediumSecurityDAOBean.saveUser(medium);
-				message.successMsg("registration", "Registration Successful");
-				return true;
-				 }
-				 message.errorMsg("registration", "YubiKey already in use");
+				if (highSecurityDAOBean.getUserByYubicoId(yubicoId) == null) {
+					high.setYubico(yubicoId);
+					highSecurityDAOBean.saveUser(high);
+					lowSecurityDAOBean.saveUser(low);
+					mediumSecurityDAOBean.saveUser(medium);
+					message.successMsg("registration", "Registration Successful");
+					return true;
+				}
+				message.errorMsg("registration", "YubiKey already in use");
 			}
 
 		}
@@ -104,8 +103,8 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	}
 
 	private boolean isUsernameValid(String username) {
-		if (!username.trim().equals("")) {
-
+		String usernameAllowedChar = "^[a-zA-Z0-9_-]*$";
+		if (!username.trim().isEmpty() && isUsernameOnlyContaining(username, usernameAllowedChar)) {
 			if (lowSecurityDAOBean.getUserByUsername(username) == null
 					&& mediumSecurityDAOBean.getUserByUsername(username) == null
 					&& highSecurityDAOBean.getUserByUsername(username) == null) {
@@ -115,12 +114,12 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 			message.errorMsg("registration", "Username taken");
 			return false;
 		}
-		message.errorMsg("registration", "Username required");
+		message.errorMsg("registration", "Username empty or wrong format");
 		return false;
 	}
 
 	private boolean isPasswordValid(String password) {
-		if (!password.trim().equals("")) {
+		if (!password.trim().isEmpty()) {
 			return true;
 		}
 		message.errorMsg("registration", "Password required");
@@ -130,7 +129,7 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 	private boolean isOTPValid(String otp) {
 		boolean validOTP = YubicoClient.isValidOTPFormat(otp);
 		if (validOTP == false) {
-			message.errorMsg("registration","Invalid OTP-format");
+			message.errorMsg("registration", "Invalid OTP-format");
 		}
 		return validOTP;
 	}
@@ -163,60 +162,68 @@ public class RegistrationEJB implements LocalRegistrationEJB {
 		highSecurityDAOBean.deleteAllUsers();
 		message.successMsg("registration", "All users deleted");
 	}
-	
+
 	public String checkPasswordStrength(String password) {
 		String passwordStrength = "";
-		if(password.trim().equals("")||password == null){
+		if (password.trim().isEmpty() || password == null) {
 			return "Invalid password";
 		}
-		if(controlPassword(password) < 2 ) {
+		if (controlPassword(password) < 2) {
 			passwordStrength = "Very strong";
 		}
-		if(controlPassword(password) >= 3 ) {
+		if (controlPassword(password) >= 3) {
 			passwordStrength = "Weak";
 		}
-		if(controlPassword(password) == 2) {
+		if (controlPassword(password) == 2) {
 			passwordStrength = "Strong";
 		}
 		return passwordStrength;
-		
+
 	}
-	
-	private int controlPassword(String password){
+
+	private int controlPassword(String password) {
 		String upperCase = "[A-Z]";
 		String lowerCase = "[a-z]";
 		String digit = "[0-9]";
-		String specialChar = "[!@#$&*]";
+		String specialChar = "[!?@#$&*]";
 		int minimumLength = 8;
 		int counter = 0;
-		if(password.length() < minimumLength){
-			counter +=2;
+		if (password.length() < minimumLength) {
+			counter += 2;
 		}
-		if(!isPasswordContaining(password, upperCase)){
+		if (!isPasswordContaining(password, upperCase)) {
 			counter++;
 		}
-		if(!isPasswordContaining(password, lowerCase)){
+		if (!isPasswordContaining(password, lowerCase)) {
 			counter++;
 		}
-		if(!isPasswordContaining(password, digit)){
+		if (!isPasswordContaining(password, digit)) {
 			counter++;
 		}
-		if(!isPasswordContaining(password, specialChar)){
+		if (!isPasswordContaining(password, specialChar)) {
 			counter++;
 		}
-		
+
 		return counter;
 	}
-	
+
 	private boolean isPasswordContaining(String password, String regex) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(password);
-		
-		if(!matcher.find()){
+
+		if (!matcher.find()) {
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean isUsernameOnlyContaining(String username, String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(username);
+
+		if (!matcher.matches()) {
 			return false;
 		}
 		return true;
 	}
 }
-
-
