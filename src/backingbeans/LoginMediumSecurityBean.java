@@ -68,6 +68,10 @@ public class LoginMediumSecurityBean implements Serializable {
 	}
 
 	public String login() {
+		if(username.trim().isEmpty() || password.trim().isEmpty()) {
+			messageService.errorMsg("login2", "Username and password required");
+			return "";
+		}
 		mediumSecurityDisplayEntity = null;
 		reversedHash = "";
 		MediumSecurityDisplayEntity returnedEntity = mediumLoginEJB.login(username, password);
