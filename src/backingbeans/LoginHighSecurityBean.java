@@ -8,6 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
@@ -16,7 +17,11 @@ import displayEntities.HighSecurityDisplayEntity;
 import ejb.interfaces.LocalHighLoginEJB;
 import messageservice.MessageService;
 
-@Named(value="loginHigh")
+/**
+ * Presentation layer for the high-login function.
+ */
+
+@Named(value = "loginHigh")
 @SessionScoped
 public class LoginHighSecurityBean implements Serializable {
 
@@ -27,15 +32,14 @@ public class LoginHighSecurityBean implements Serializable {
 	private String otp;
 	private MessageService messageService;
 	private HighSecurityDisplayEntity highSecurityDisplayEntity;
-	
+
 	@EJB
 	private LocalHighLoginEJB highLoginEJB;
 
-	
 	public LoginHighSecurityBean() {
 		messageService = new MessageService();
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -59,8 +63,6 @@ public class LoginHighSecurityBean implements Serializable {
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
-	
-	
 
 	public HighSecurityDisplayEntity getHighSecurityDisplayEntity() {
 		return highSecurityDisplayEntity;
@@ -70,13 +72,18 @@ public class LoginHighSecurityBean implements Serializable {
 		this.highSecurityDisplayEntity = highSecurityDisplayEntity;
 	}
 
-	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, YubicoVerificationException, YubicoValidationFailure {
-		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password); 
+	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+
+		if (username.trim().isEmpty() || password.trim().isEmpty() || otp.trim().isEmpty()) {
+			messageService.errorMsg("login3", "Username, password & OTP required");
+			return "";
+		}
+		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password);
 
 		String returnCode;
 		if (returnedEntity != null) {
 			returnCode = highLoginEJB.yubicoHandler(returnedEntity, otp);
-			if(returnCode.equals("loggedOnHighSecurity")) {
+			if (returnCode.equals("loggedOnHighSecurity")) {
 				this.highSecurityDisplayEntity = returnedEntity;
 				this.username = "";
 				this.password = "";
@@ -92,15 +99,9 @@ public class LoginHighSecurityBean implements Serializable {
 		}
 	}
 
-	
-	
 	public String logout() {
 		this.highSecurityDisplayEntity = null;
 		return "startpage";
 	}
-	
 
-	
-	
-	
 }

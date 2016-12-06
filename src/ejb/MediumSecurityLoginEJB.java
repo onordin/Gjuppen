@@ -11,6 +11,10 @@ import helpers.MD5_API_Reader;
 
 import javax.ejb.EJB;
 
+/**
+ * Business logic for medium security login.
+ */
+
 @Stateless
 public class MediumSecurityLoginEJB implements LocalMediumLoginEJB {
 	
@@ -34,6 +38,9 @@ public class MediumSecurityLoginEJB implements LocalMediumLoginEJB {
 		return null;
 	}
 
+	/**
+	 * Method that unhashes the MD5-password stored in the database using MD5_API-Reader.java file.
+	 */
 	@Override
 	public String reverseHash(String hashedPassword) {
 		String returnValue = "";

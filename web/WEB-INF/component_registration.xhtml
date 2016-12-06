@@ -55,7 +55,7 @@
 							<h:inputSecret id="registrationPassword" label=""
 								value="#{registrationBean.password}">
 								<f:ajax event="keyup"
-									listener="#{registrationBean.checkPasswordStrength()}"
+									listener="#{registrationBean.setPasswordStrength()}"
 									render="passwordStrength" />
 							</h:inputSecret>
 							<h:outputLabel for="registrationOTP" value="Yubico key:"></h:outputLabel>
@@ -63,7 +63,7 @@
 								value="#{registrationBean.otp}">
 							</h:inputSecret>
 							<h:outputLabel id="passwordStrenghtLabel" for="passwordStrength"
-								value="Password Strength: "></h:outputLabel>
+								value="Password strength: "></h:outputLabel>
 							<h:outputText id="passwordStrength"
 								value="#{registrationBean.passwordStrength}"></h:outputText>
 							<f:facet name="footer">

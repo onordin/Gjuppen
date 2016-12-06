@@ -43,15 +43,27 @@
 				</h:form>
 			</div>
 			
+			<h:outputText value="HIGH! "></h:outputText>
 			<h:outputText value="We have returned this username from our database:"></h:outputText>
 			<br/>
 			<h:outputText class="outPutHighlight" value="#{loginHigh.highSecurityDisplayEntity.username}"></h:outputText>
 			<br/>
-			<h:outputText value="Your hashed password looks like this:"></h:outputText>
+			<h:outputText value="Your password has been encrypted with a PBKDF2 function and added a salt to it. The salt looks like this:"></h:outputText>
+			<br/>
+			<h:outputText class="outPutHighlight" value="#{loginHigh.highSecurityDisplayEntity.salt}"></h:outputText>
+			<br/>
+			<h:outputText value="Your password has been hashed with the salt through a SHA-1 algorithm. This hashed password is what is stored in our database:"></h:outputText>
 			<br/>
 			<h:outputText class="outPutHighlight" value="#{loginHigh.highSecurityDisplayEntity.hashedPassword}"></h:outputText>
 			<br/>
-			
+			<h:outputText value="You logged in with your unique Yubikey which is connected to your user. Your Yubikey id looks like this:"></h:outputText>
+			<br/>
+			<h:outputText class="outPutHighlight" value="#{loginHigh.highSecurityDisplayEntity.yubicoId}"></h:outputText>
+			<br/>
+			<h:outputText value="All data has been sent encrypted with the use of Transport Layer Security (TLS) protocol through a HTTPS connection.
+			As the certificate is self-signed, the browser is complaining."></h:outputText>
+			<br/>
+			<h:outputText value="This site uses JPA and named parameters in the JPQL for the database connection to prevent SQL injections."></h:outputText>
 
 
 			</div>		

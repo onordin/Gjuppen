@@ -13,6 +13,10 @@ import javax.persistence.TypedQuery;
 
 import entities.LowSecurityEntity;
 
+/**
+ * Class LowSecurityDAOBean talks to database table low.
+ */
+
 @Stateless
 public class LowSecurityDAOBean {
 	

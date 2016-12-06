@@ -51,13 +51,11 @@
 				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
 			    
 			    	<h:outputLabel for="login2Username" value="Username:"></h:outputLabel>
-					<h:inputText id="login2Username" label="" value="#{loginMedium.username}" required="true"
-							requiredMessage="This field is required">	 
+					<h:inputText id="login2Username" label="" value="#{loginMedium.username}">	 
 					</h:inputText>
 					
 					<h:outputLabel for="login2Password" value="Password:"></h:outputLabel>
-					<h:inputSecret id="login2Password" label="" value="#{loginMedium.password}" required="true"
-							requiredMessage="This field is required">	 
+					<h:inputSecret id="login2Password" label="" value="#{loginMedium.password}">	 
 					</h:inputSecret>
 	
 	
@@ -84,18 +82,15 @@
 				    <h:panelGrid columns="2" columnClasses="rightAlign, leftAlign">
 			    
 			    	<h:outputLabel for="login3Username" value="Username:"></h:outputLabel>
-					<h:inputText id="login3Username" label="" value="#{loginHigh.username}" required="true"
-							requiredMessage="This field is required">	 
+					<h:inputText id="login3Username" label="" value="#{loginHigh.username}">	 
 					</h:inputText>
 					
 					<h:outputLabel for="login3Password" value="Password:"></h:outputLabel>
-					<h:inputSecret id="login3Password" label="" value="#{loginHigh.password}" required="true"
-							requiredMessage="This field is required">	 
+					<h:inputSecret id="login3Password" label="" value="#{loginHigh.password}">	 
 					</h:inputSecret>
 					
 					<h:outputLabel for="loginOTP" value="Yubico key:"></h:outputLabel>
-					<h:inputSecret id="loginOTP" label="" value="#{loginHigh.otp}" required="true"
-							requiredMessage="This field is required">	 
+					<h:inputSecret id="loginOTP" label="" value="#{loginHigh.otp}">	 
 					</h:inputSecret>
 					
 			        <h:commandButton action="#{loginHigh.login()}" value="Login"></h:commandButton>

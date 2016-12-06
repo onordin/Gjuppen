@@ -11,6 +11,10 @@ import javax.persistence.TypedQuery;
 import entities.LowSecurityEntity;
 import entities.MediumSecurityEntity;
 
+/**
+ * Class MediumSecurityDAOBean talks to database table medium.
+ */
+
 @Stateless
 public class MediumSecurityDAOBean {
 	

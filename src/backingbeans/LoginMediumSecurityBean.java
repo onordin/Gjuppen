@@ -10,6 +10,10 @@ import displayEntities.MediumSecurityDisplayEntity;
 import ejb.interfaces.LocalMediumLoginEJB;
 import messageservice.MessageService;
 
+/**
+ * Presentation layer for the medium-login function.
+ */
+
 @Named(value="loginMedium")
 @SessionScoped
 public class LoginMediumSecurityBean implements Serializable {
@@ -64,6 +68,10 @@ public class LoginMediumSecurityBean implements Serializable {
 	}
 
 	public String login() {
+		if(username.trim().isEmpty() || password.trim().isEmpty()) {
+			messageService.errorMsg("login2", "Username and password required");
+			return "";
+		}
 		mediumSecurityDisplayEntity = null;
 		reversedHash = "";
 		MediumSecurityDisplayEntity returnedEntity = mediumLoginEJB.login(username, password);
@@ -85,7 +93,7 @@ public class LoginMediumSecurityBean implements Serializable {
 		System.out.println("hashedPassword: " + hashedPassword);
 		String resultReversedHash = mediumLoginEJB.reverseHash(hashedPassword);
 		if(resultReversedHash != null && resultReversedHash != "" && resultReversedHash.length() != 0) {		 
-			//vid failed de-cryption så verkar den returnera en sträng som inte är "" men length är 0 vilket åtminstone gör att den hamnar i "else" delen av metoden
+			//vid failed de-cryption sï¿½ verkar den returnera en strï¿½ng som inte ï¿½r "" men length ï¿½r 0 vilket ï¿½tminstone gï¿½r att den hamnar i "else" delen av metoden
 			this.reversedHash = resultReversedHash;
 		}else {
 			this.reversedHash = "Congratulations, your password was strong/unique enough to resist MD5 decryption (for now)";
