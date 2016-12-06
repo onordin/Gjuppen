@@ -8,6 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
@@ -74,7 +75,7 @@ public class LoginHighSecurityBean implements Serializable {
 		this.highSecurityDisplayEntity = highSecurityDisplayEntity;
 	}
 
-	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException, YubicoVerificationException, YubicoValidationFailure {
+	public String login() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		HighSecurityDisplayEntity returnedEntity = highLoginEJB.login(username, password); 
 
 		String returnCode;
