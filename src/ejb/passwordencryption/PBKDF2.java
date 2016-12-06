@@ -27,7 +27,7 @@ public class PBKDF2 {
 	 */
 	public static String generateHashedPassword(char[] password, byte[] salt) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
 		PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, 64*8);
-		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
 		byte[] hash = skf.generateSecret(spec).getEncoded();		
 		return toHex(hash);
 	}
@@ -88,7 +88,7 @@ public class PBKDF2 {
 		byte[] originalHash = fromHex(storedPassword);
 		
 		PBEKeySpec spec = new PBEKeySpec(inputPassword.toCharArray(), salt, iterations, originalHash.length*8);
-		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
 		byte[] testHash = skf.generateSecret(spec).getEncoded();
 		int diff = originalHash.length ^ testHash.length; // ^ means or. If diff = 0 then the length is correct.
 		for(int i=0; i<originalHash.length && i<testHash.length; i++) {
