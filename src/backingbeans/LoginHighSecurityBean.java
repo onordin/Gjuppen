@@ -8,10 +8,6 @@ import java.security.spec.InvalidKeySpecException;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
-import com.yubico.client.v2.exceptions.YubicoValidationFailure;
-import com.yubico.client.v2.exceptions.YubicoVerificationException;
 
 import displayEntities.HighSecurityDisplayEntity;
 import ejb.interfaces.LocalHighLoginEJB;

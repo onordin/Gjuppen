@@ -8,7 +8,6 @@ import dao.LowSecurityDAOBean;
 import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
 import entities.LowSecurityEntity;
-import messageservice.MessageService;
 
 /**
  * Business logic for low security login.

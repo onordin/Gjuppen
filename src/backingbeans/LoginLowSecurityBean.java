@@ -3,13 +3,11 @@ package backingbeans;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import displayEntities.LowSecurityDisplayEntity;
 import ejb.interfaces.LocalLowLoginEJB;
-import entities.LowSecurityEntity;
 import messageservice.MessageService;
 
 /**
