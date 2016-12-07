@@ -51,10 +51,12 @@
 			        <div class="keyBox">
 				        <h:outputText class="RSAheader" value="Generated RSA Public Key:"></h:outputText>
 				      	<br/>
+				      	<br/>
 				      	<h:outputText class="RSAheader" value="Public Exponent: "></h:outputText>
 				      	<h:outputText id="publicExp" value="#{encryptionBean.publicKeyExp}"></h:outputText>
 				      	<br/>
-				      	<h:outputText class="RSAheader" value="Private ExPublic Modulus: "></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Public Modulus: "></h:outputText>
 				      	<h:outputText id="publicMod" value="#{encryptionBean.publicKeyMod}"></h:outputText>
 			      	<br/>
 			      	</div>
@@ -63,10 +65,12 @@
 				      	<h:outputText class="RSAheader" value="Generated RSA Private Key: "></h:outputText>
 				      	<h:outputText class="RSAheaderHighlight" value="(normally kept at the server)"></h:outputText>
 				      	<br/>
+				      	<br/>
 				      	<h:outputText class="RSAheader" value="Private Exponent: "></h:outputText>
 				      	<h:outputText id="privateExp" value="#{encryptionBean.privateKeyExp}"></h:outputText>
 				      	<br/>
-				      	<h:outputText class="RSAheader" value="Private Modulus "></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Private Modulus: "></h:outputText>
 				      	<h:outputText id="privateMod" value="#{encryptionBean.privateKeyMod}"></h:outputText>
 					</div>
 					
