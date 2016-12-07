@@ -38,51 +38,68 @@
 	
 		<div class="row">
 			<div class="col-sm-10" id="RSA">
-				<h4>Demo RSA</h4>
+				<h3>Demo HTTPS/SSL (RSA)</h3>
 					<br/>
 					
 					<h:form>
 			        <h:commandButton value="Setup RSA keys">
-			        	<f:ajax listener="#{encryptionBean.setupForNewDemo()}" render="private public" update="private public"/>
+			        	<f:ajax listener="#{encryptionBean.setupForNewDemo()}" render="privateExp privateMod publicExp publicMod"/>
 			        </h:commandButton>
 			        </h:form>
 			        
 			        
-			        <h:outputText value="Generated RSA Private Key:"></h:outputText>
+			        <div class="keyBox">
+				        <h:outputText class="RSAheader" value="Generated RSA Public Key:"></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Public Exponent: "></h:outputText>
+				      	<h:outputText id="publicExp" value="#{encryptionBean.publicKeyExp}"></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Private ExPublic Modulus: "></h:outputText>
+				      	<h:outputText id="publicMod" value="#{encryptionBean.publicKeyMod}"></h:outputText>
 			      	<br/>
-			      	<h:outputText id="private" value="#{encryptionBean.privateKey} (this is normally kept secret at the server)"></h:outputText>
+			      	</div>
 			      	<br/>
-			      	<h:outputText value="Generated RSA Public Key:"></h:outputText>
-			      	<br/>
-			      	<h:outputText id="public" value="#{encryptionBean.publicKey}"></h:outputText>
-			      	
+			      	<div class="keyBox">
+				      	<h:outputText class="RSAheader" value="Generated RSA Private Key: "></h:outputText>
+				      	<h:outputText class="RSAheaderHighlight" value="(normally kept at the server)"></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Private Exponent: "></h:outputText>
+				      	<h:outputText id="privateExp" value="#{encryptionBean.privateKeyExp}"></h:outputText>
+				      	<br/>
+				      	<h:outputText class="RSAheader" value="Private Modulus "></h:outputText>
+				      	<h:outputText id="privateMod" value="#{encryptionBean.privateKeyMod}"></h:outputText>
+					</div>
+					
 
 					<h:form>
-					
-					<br/>
-			      	<h:inputText id="entered" value="#{encryptionBean.textEntered}" required="true"
-							requiredMessage="This field is required"></h:inputText>
-			      	<br/>
-			      	
-			        <h:commandButton value="Encrypt using public key" action="#{encryptionBean.encryptMessage()}">
-			        </h:commandButton>
-			        	
+						<br/>
+				      	<h:inputText id="entered" value="#{encryptionBean.textEntered}" required="true"
+								requiredMessage="This field is required"></h:inputText>
+				      	<br/>
+				      	
+				        <h:commandButton value="Encrypt using public key">
+				        	<f:ajax execute="entered" listener="#{encryptionBean.encryptMessage()}" render="encryptedDiv encrypted"/>
+				        </h:commandButton>
+				        <h:outputText class="RSAheader" value="(This normally takes place in your web browser)"></h:outputText>
 			        </h:form>
 					
 					<div id="encryptedDiv">
 					<h:outputText id="encrypted" value="#{encryptionBean.textEncrypted}"></h:outputText>
 					</div>
 						
-			    	<h:outputText value="Decrypt it back again:"></h:outputText>
-	
+					<br/>
 			    	<h:form>
-					<h:commandButton value="Decrypt using private key" action="#{encryptionBean.decryptMessage()}"></h:commandButton>
+					<h:commandButton value="Decrypt again using private key">
+						<f:ajax listener="#{encryptionBean.decryptMessage()}" render="decryptedDiv decrypted"/>
+					</h:commandButton>
+					<h:outputText class="RSAheader" value="(This normally takes place back att the server)"></h:outputText>
 			        </h:form>
 					
 					<div id="decryptedDiv">
 					<h:outputText id="decrypted" value="#{encryptionBean.textDecrypted}"></h:outputText>
 					</div>
-		
+					<br/>
+					<div id="space"></div>
 		
 			</div>
 		</div>   <!-- end of row -->

@@ -40,16 +40,6 @@ body {
 }
 
 
-#encryptedDiv {
-	height: 200px;
-}
-
-#decryptedDiv {
-	height: 200px;
-}
-
-
-
 
 
 /*  Login  */
@@ -97,3 +87,36 @@ body {
 
 /*  Logged On   */
 
+
+.keyBox {
+	border: 1px solid #800040;
+	padding: 5px; 
+	margin: 2px;
+}
+
+#encryptedDiv {
+	min-height: 100px;
+	border: 1px solid #800040;
+	padding: 5px; 	 
+	margin: 2px;
+}
+
+#decryptedDiv {
+	min-height: 100px;
+	border: 1px solid #800040;
+	padding: 5px;  
+	margin: 2px;
+}
+
+#space {
+	height: 200px;
+}
+
+.RSAheader {
+	font-weight: bold;
+}
+
+.RSAheaderHighlight {
+	font-weight: bold;
+	color: #cb349d;
+}
